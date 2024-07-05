@@ -1,7 +1,6 @@
 {
   "@typescript-eslint/no-explicit-any": "error",
   "no-console": "off",
-
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
@@ -17,7 +16,12 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      // "@shared/*": ["./src/shared/*"],
+      // "@components/*": ["./components/*"],
+      "@models/*": ["./src/models/*"],
+    }
   },
   "include": ["src", ".eslintrc.cjs"],
   "references": [{ "path": "./tsconfig.vite.json" }]

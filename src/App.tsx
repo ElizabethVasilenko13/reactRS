@@ -1,34 +1,50 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import { MovieApiResp } from '@models/movie-api.interface';
+import { Component } from 'react';
+import SearchBar from './components/SearchBar/SearchBar';
+import SearchResults from './components/SearchResults/SearchResults';
+import Loader from './shared/Loader/Loader';
 
-function App() {
-  const [count, setCount] = useState(0);
+interface AppState {
+  searchResult: MovieApiResp[];
+  loading: boolean;
+}
+class App extends Component<AppState> {
+  state: AppState = {
+    searchResult: [],
+    loading: true,
+  };
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" rel="noreferrer" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" rel="noreferrer" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+  private startSearchQuery: string = '';
+
+  componentDidMount() {
+    this.startSearchQuery = localStorage.getItem('searchQuery') || '';
+    if (this.startSearchQuery.length > 0) {
+      this.fetchSearchResultsAndUpdateState(this.startSearchQuery);
+    }
+  }
+
+  handleSearch = (searchQuery: string) => {
+    console.log(searchQuery);
+    this.setState({ loading: true });
+    this.fetchSearchResultsAndUpdateState(searchQuery);
+  };
+
+  fetchSearchResultsAndUpdateState = (searchQuery: string) => {
+    // fetchSearchResults(searchQuery).then((data) => {
+    //   this.setState({ searchResult: data, loading: false });
+    // });
+  };
+
+  render() {
+    const { searchResult, loading } = this.state;
+    return (
+      <div className="app-container">
+        <h1>Movies</h1>
+        <SearchBar onSearch={this.handleSearch} startSearchQuery={this.startSearchQuery} />
+        {loading ? <Loader /> : <SearchResults />}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button type="button" onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  );
+    );
+  }
 }
 
 export default App;
