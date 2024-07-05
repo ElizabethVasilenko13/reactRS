@@ -20,7 +20,7 @@
     "paths": {
       // "@shared/*": ["./src/shared/*"],
       // "@components/*": ["./components/*"],
-      "@models/*": ["./src/models/*"],
+      "@models/*": ["./src/models/*"]
     }
   },
   "include": ["src", ".eslintrc.cjs"],

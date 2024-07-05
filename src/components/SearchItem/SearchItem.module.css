@@ -1,0 +1,21 @@
+.card {
+  display: flex;
+  max-width: 400px;
+  padding: 10px 10px 20px 10px;
+  column-gap: 30px;
+  align-items: center;
+  border-bottom: 3px dashed #b19554;
+}
+
+h3 {
+  margin: 0;
+  background-color: #b19554;
+  width: fit-content;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 0;
+}

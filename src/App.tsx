@@ -40,8 +40,11 @@ class App extends Component<AppState> {
     return (
       <div className="app-container">
         <h1>Movies</h1>
-        <SearchBar onSearch={this.handleSearch} startSearchQuery={this.startSearchQuery} />
-        {loading ? <Loader /> : <SearchResults />}
+        <SearchBar
+          onSearch={this.handleSearch}
+          startSearchQuery={this.startSearchQuery}
+        />
+        {loading ? <Loader /> : <SearchResults searchResult={searchResult} />}
       </div>
     );
   }

@@ -17,9 +17,7 @@ class SearchBar extends Component<SearchBarProps, SearchBarState> {
     // isError: false,
   };
 
-  handleInput = ({
-    target: { value },
-  }: ChangeEvent<HTMLInputElement>) => {
+  handleInput = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     this.setState({ searchQuery: value });
   };
 

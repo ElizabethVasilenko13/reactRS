@@ -1,11 +1,11 @@
 export interface MovieApiResp {
-  id: string
+  id: string;
   primaryImage: null | PrimaryImage;
-  titleType: TitleType
-  titleText: TitleText
-  originalTitleText: OriginalTitleText
-  releaseYear: ReleaseYear
-  releaseDate: ReleaseDate
+  titleType: TitleType;
+  titleText: TitleText;
+  originalTitleText: OriginalTitleText;
+  releaseYear: ReleaseYear;
+  releaseDate: ReleaseDate;
 }
 
 interface PrimaryImage {
@@ -19,25 +19,25 @@ interface PrimaryImage {
 }
 
 interface TitleType {
-  text: string
-  id: string
-  isSeries: boolean
-  isEpisode: boolean
+  text: string;
+  id: string;
+  isSeries: boolean;
+  isEpisode: boolean;
 }
 
 interface TitleText {
-  text: string
+  text: string;
 }
 
 interface OriginalTitleText extends TitleText {}
 
 interface ReleaseYear {
-  year: number
-  endYear: null
+  year: number;
+  endYear: null;
 }
 
 interface ReleaseDate {
-  day: number
-  month: number
-  year: number
+  day: number;
+  month: number;
+  year: number;
 }
