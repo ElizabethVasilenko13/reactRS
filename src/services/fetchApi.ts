@@ -26,6 +26,4 @@ export const fetchSearchResults = async (searchTerm: string) => {
 };
 
 // check ofline
-// install scss
 // types
-// loader
