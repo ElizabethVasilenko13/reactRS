@@ -9,7 +9,6 @@ interface SearchItemProps {
 class SearchItem extends Component<SearchItemProps> {
   render() {
     const { movie } = this.props;
-
     return (
       <div className={styles.card}>
         <div className={styles.image}>

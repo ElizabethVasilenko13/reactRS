@@ -16,8 +16,8 @@ export const fetchData = async (apiUrl: string) => {
     return data;
   } catch (error) {
     if (
-      error instanceof TypeError
-      && error.message.includes('Failed to fetch')
+      error instanceof TypeError &&
+      error.message.includes('Failed to fetch')
     ) {
       console.error('No internet connection or failed to fetch data');
       return 'No internet connection or failed to fetch data';
@@ -25,5 +25,3 @@ export const fetchData = async (apiUrl: string) => {
     return error;
   }
 };
-
-// types

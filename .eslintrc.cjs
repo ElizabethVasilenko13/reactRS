@@ -31,10 +31,12 @@ module.exports = {
     'react/state-in-constructor': 'off',
     'react/no-unused-prop-types': 'off',
     'import/prefer-default-export': 'off',
+    'react/jsx-no-useless-fragment': 'off',
     'react/prefer-stateless-function': 'off',
     'no-promise-executor-return': 'off',
     'react/require-default-props': 'off',
     'no-console': 'off',
     'class-methods-use-this': 'off',
+    'operator-linebreak': 'off',
   },
 };

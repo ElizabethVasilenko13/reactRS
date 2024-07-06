@@ -1,6 +1,6 @@
 .form {
   display: flex;
-  justify-content: start;
+  justify-content: center;
   width: 100%;
   display: flex;
   align-items: center;
@@ -30,5 +30,6 @@ button {
 
 .buttonError {
   background-color: #9d977c80;
-  margin-top: 10px;
+  display: block;
+  margin: 10px auto;
 }

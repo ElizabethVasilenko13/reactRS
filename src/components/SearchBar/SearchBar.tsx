@@ -20,13 +20,7 @@ class SearchBar extends Component<SearchBarProps, SearchBarState> {
     };
   }
 
-  componentDidUpdate(
-    prevProps: SearchBarProps,
-    prevState: SearchBarState
-  ): void {
-    console.log('props', prevProps);
-    console.log('state', prevState);
-
+  componentDidUpdate(prevProps: SearchBarProps): void {
     if (this.props.startSearchQuery !== prevProps.startSearchQuery) {
       this.setState({ searchQuery: this.props.startSearchQuery });
     }
@@ -39,10 +33,8 @@ class SearchBar extends Component<SearchBarProps, SearchBarState> {
   handleSearch = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { searchQuery } = this.state;
-    if (searchQuery) {
-      localStorage.setItem('searchQuery', searchQuery.trim());
-      this.props.onSearch(searchQuery.trim());
-    }
+    localStorage.setItem('searchQuery', searchQuery.trim());
+    this.props.onSearch(searchQuery.trim());
   };
 
   handleError = () => {
@@ -76,8 +68,8 @@ class SearchBar extends Component<SearchBarProps, SearchBarState> {
         >
           Show Error
         </button>
-        {isError
-          && (() => {
+        {isError &&
+          (() => {
             throw new Error('I crashed!');
           })()}
       </div>

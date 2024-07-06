@@ -32,9 +32,10 @@ class App extends Component<unknown, AppState> {
   };
 
   fetchSearchResultsAndUpdateState = (searchQuery: string) => {
-    const apiUrl = searchQuery.length > 0
-      ? `${MOVIES_API_URL}${MOVIES_TITLE_SEARCH_ENDPOINT}${searchQuery}?exact=false&titleType=movie`
-      : `${MOVIES_API_URL}titles`;
+    const apiUrl =
+      searchQuery.length > 0
+        ? `${MOVIES_API_URL}${MOVIES_TITLE_SEARCH_ENDPOINT}${searchQuery}?exact=false&titleType=movie`
+        : `${MOVIES_API_URL}titles`;
     fetchData(apiUrl).then((data) => {
       this.setState({ searchResult: data.results, loading: false });
     });
