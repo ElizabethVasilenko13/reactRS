@@ -33,6 +33,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'react/prefer-stateless-function': 'off',
     'no-promise-executor-return': 'off',
+    'react/require-default-props': 'off',
     'no-console': 'off',
     'class-methods-use-this': 'off',
   },

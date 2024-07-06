@@ -8,14 +8,29 @@ interface SearchBarProps {
 
 interface SearchBarState {
   searchQuery: string;
-  isError?: boolean;
+  isError: boolean;
 }
 
 class SearchBar extends Component<SearchBarProps, SearchBarState> {
-  state = {
-    searchQuery: this.props.startSearchQuery,
-    // isError: false,
-  };
+  constructor(props: SearchBarProps) {
+    super(props);
+    this.state = {
+      searchQuery: props.startSearchQuery,
+      isError: false,
+    };
+  }
+
+  componentDidUpdate(
+    prevProps: SearchBarProps,
+    prevState: SearchBarState
+  ): void {
+    console.log('props', prevProps);
+    console.log('state', prevState);
+
+    if (this.props.startSearchQuery !== prevProps.startSearchQuery) {
+      this.setState({ searchQuery: this.props.startSearchQuery });
+    }
+  }
 
   handleInput = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     this.setState({ searchQuery: value });
@@ -31,12 +46,11 @@ class SearchBar extends Component<SearchBarProps, SearchBarState> {
   };
 
   handleError = () => {
-    throw new Error('I crashed!');
-    // this.setState({ isError: true });
+    this.setState({ isError: true });
   };
 
   render() {
-    const { searchQuery } = this.state;
+    const { searchQuery, isError } = this.state;
     return (
       <div>
         <form className={styles.form}>
@@ -62,10 +76,10 @@ class SearchBar extends Component<SearchBarProps, SearchBarState> {
         >
           Show Error
         </button>
-        {/* {isError &&
-          (() => {
+        {isError
+          && (() => {
             throw new Error('I crashed!');
-          })()} */}
+          })()}
       </div>
     );
   }

@@ -3,13 +3,17 @@ import Loader from '@shared/Loader/Loader';
 import { MovieApiResp } from '@models/movie-api.interface';
 import SearchBar from '@components/SearchBar/SearchBar';
 import SearchResults from '@components/SearchResults/SearchResults';
-import { fetchSearchResults } from '@services/fetchApi';
+import { fetchData } from '@services/fetchApi';
+import {
+  MOVIES_API_URL,
+  MOVIES_TITLE_SEARCH_ENDPOINT,
+} from '@constants/api.constants';
 
 interface AppState {
   searchResult: MovieApiResp[];
   loading: boolean;
 }
-class App extends Component<AppState> {
+class App extends Component<unknown, AppState> {
   state: AppState = {
     searchResult: [],
     loading: true,
@@ -19,9 +23,7 @@ class App extends Component<AppState> {
 
   componentDidMount() {
     this.startSearchQuery = localStorage.getItem('searchQuery') || '';
-    if (this.startSearchQuery.length > 0) {
-      this.fetchSearchResultsAndUpdateState(this.startSearchQuery);
-    }
+    this.fetchSearchResultsAndUpdateState(this.startSearchQuery);
   }
 
   handleSearch = (searchQuery: string) => {
@@ -30,7 +32,10 @@ class App extends Component<AppState> {
   };
 
   fetchSearchResultsAndUpdateState = (searchQuery: string) => {
-    fetchSearchResults(searchQuery).then((data) => {
+    const apiUrl = searchQuery.length > 0
+      ? `${MOVIES_API_URL}${MOVIES_TITLE_SEARCH_ENDPOINT}${searchQuery}?exact=false&titleType=movie`
+      : `${MOVIES_API_URL}titles`;
+    fetchData(apiUrl).then((data) => {
       this.setState({ searchResult: data.results, loading: false });
     });
   };
