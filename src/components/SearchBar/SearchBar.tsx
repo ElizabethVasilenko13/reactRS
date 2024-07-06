@@ -1,5 +1,5 @@
 import { ChangeEvent, Component, MouseEvent } from 'react';
-import styles from './SearchBar.module.css';
+import styles from './SearchBar.module.scss';
 
 interface SearchBarProps {
   onSearch: (searchQuery: string) => void;

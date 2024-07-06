@@ -17,11 +17,14 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./src",
     "paths": {
-      // "@shared/*": ["./src/shared/*"],
-      // "@components/*": ["./components/*"],
-      "@models/*": ["./src/models/*"]
-      // "@constants/*": ["./src/constants/*"]
+      "@shared/*": ["./shared/*"],
+      "@components/*": ["./components/*"],
+      "@models/*": ["./models/*"],
+      "@constants/*": ["./constants/*"],
+      "@services/*": ["./services/*"],
+      "@assets/*": ["./assets/*"]
     }
   },
   "include": ["src", ".eslintrc.cjs"],

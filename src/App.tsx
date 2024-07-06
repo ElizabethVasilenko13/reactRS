@@ -1,9 +1,9 @@
-import { MovieApiResp } from '@models/movie-api.interface';
 import { Component } from 'react';
-import SearchBar from './components/SearchBar/SearchBar';
-import SearchResults from './components/SearchResults/SearchResults';
-import Loader from './shared/Loader/Loader';
-import { fetchSearchResults } from './services/fetchApi';
+import Loader from '@shared/Loader/Loader';
+import { MovieApiResp } from '@models/movie-api.interface';
+import SearchBar from '@components/SearchBar/SearchBar';
+import SearchResults from '@components/SearchResults/SearchResults';
+import { fetchSearchResults } from '@services/fetchApi';
 
 interface AppState {
   searchResult: MovieApiResp[];

@@ -1,7 +1,7 @@
-import { MovieApiResp } from '@models/movie-api.interface';
 import { Component } from 'react';
-import styles from './SearchItem.module.css';
-import noImage from '../../assets/no-image.jpg';
+import { MovieApiResp } from '@models/movie-api.interface';
+import noImage from '@assets/no-image.jpg';
+import styles from './SearchItem.module.scss';
 
 interface SearchItemProps {
   movie: MovieApiResp;

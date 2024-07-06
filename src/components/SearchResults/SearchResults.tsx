@@ -1,7 +1,7 @@
 import { Component } from 'react';
+import SearchItem from '@components/SearchItem/SearchItem';
 import { MovieApiResp } from '@models/movie-api.interface';
-import styles from './SearchResults.module.css';
-import SearchItem from '../SearchItem/SearchItem';
+import styles from './SearchResults.module.scss';
 
 interface SearchResultsProps {
   searchResult: MovieApiResp[];

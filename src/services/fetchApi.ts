@@ -20,10 +20,13 @@ export const fetchSearchResults = async (searchTerm: string) => {
 
     const data = await response.json();
     return data;
-  } catch (error: unknown) {
+  } catch (error) {
+    if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+      console.error('No internet connection or failed to fetch data');
+      return 'No internet connection or failed to fetch data';
+    }
     return error;
   }
 };
 
-// check ofline
 // types
