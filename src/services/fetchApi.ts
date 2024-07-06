@@ -9,7 +9,7 @@ export const fetchSearchResults = async (searchTerm: string) => {
     const response = await fetch(apiUrl, {
       method: 'GET',
       headers: {
-        'x-rapidapi-key': '5235c39fccmshdc2635cd7e0e5a2p1e3f17jsnd14ab9e0d89c',
+        'x-rapidapi-key': import.meta.env.VITE_MOVIES_API_KEY,
         'x-rapidapi-host': 'moviesdatabase.p.rapidapi.com',
       },
     });

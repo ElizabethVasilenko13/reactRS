@@ -11,15 +11,15 @@ class SearchResults extends Component<SearchResultsProps> {
   render() {
     const { searchResult } = this.props;
     return (
-      <div>
+      <div className={styles.container}>
         {!searchResult || searchResult.length === 0 ? (
           <h1>Oops, something went wrong...</h1>
         ) : (
-          <div className={styles.container}>
+          <>
             {searchResult.map((searchItem: MovieApiResp) => (
               <SearchItem key={searchItem.id} movie={searchItem} />
             ))}
-          </div>
+          </>
         )}
       </div>
     );
