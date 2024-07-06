@@ -23,6 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-.evn
-*.evn
-.evn*
+.env
+*.env
+.env*
