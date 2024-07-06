@@ -1,6 +1,7 @@
 import { MovieApiResp } from '@models/movie-api.interface';
 import { Component } from 'react';
 import styles from './SearchItem.module.css';
+import noImage from '../../assets/no-image.jpg';
 
 interface SearchItemProps {
   movie: MovieApiResp;
@@ -11,19 +12,16 @@ class SearchItem extends Component<SearchItemProps> {
 
     return (
       <div className={styles.card}>
-        {movie.primaryImage ? (
-          <img
-            src={movie.primaryImage.url}
-            alt="Movie"
-            width={50}
-            height={50}
-          />
-        ) : (
-          <img src="" alt="Movie" width={40} />
-        )}
-        <div className={styles.beerInfo}>
+        <div className={styles.image}>
+          {movie.primaryImage ? (
+            <img src={movie.primaryImage.url} alt="Movie" />
+          ) : (
+            <img src={noImage} alt="Movie" />
+          )}
+        </div>
+        <div className={styles.movieInfo}>
           <h3>{movie.titleText.text}</h3>
-          <p>Year: {movie.releaseYear.year}</p>
+          <p>{movie.releaseYear ? `Year: ${movie.releaseYear.year}` : ''}</p>
         </div>
       </div>
     );

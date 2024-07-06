@@ -3,6 +3,7 @@ import { Component } from 'react';
 import SearchBar from './components/SearchBar/SearchBar';
 import SearchResults from './components/SearchResults/SearchResults';
 import Loader from './shared/Loader/Loader';
+import { fetchSearchResults } from './services/fetchApi';
 
 interface AppState {
   searchResult: MovieApiResp[];
@@ -24,15 +25,14 @@ class App extends Component<AppState> {
   }
 
   handleSearch = (searchQuery: string) => {
-    console.log(searchQuery);
     this.setState({ loading: true });
     this.fetchSearchResultsAndUpdateState(searchQuery);
   };
 
   fetchSearchResultsAndUpdateState = (searchQuery: string) => {
-    // fetchSearchResults(searchQuery).then((data) => {
-    //   this.setState({ searchResult: data, loading: false });
-    // });
+    fetchSearchResults(searchQuery).then((data) => {
+      this.setState({ searchResult: data.results, loading: false });
+    });
   };
 
   render() {

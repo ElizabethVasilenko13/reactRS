@@ -8,6 +8,10 @@ export interface MovieApiResp {
   releaseDate: ReleaseDate;
 }
 
+export interface ApiError {
+  message: string;
+}
+
 interface PrimaryImage {
   id: string;
   width: number;

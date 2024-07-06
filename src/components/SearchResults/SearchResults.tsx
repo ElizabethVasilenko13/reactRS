@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { MovieApiResp } from '@models/movie-api.interface';
-import styles from './SearchResults.module.scss';
+import styles from './SearchResults.module.css';
 import SearchItem from '../SearchItem/SearchItem';
 
 interface SearchResultsProps {
@@ -12,7 +12,7 @@ class SearchResults extends Component<SearchResultsProps> {
     const { searchResult } = this.props;
     return (
       <div>
-        {searchResult.length === 0 || !searchResult ? (
+        {!searchResult || searchResult.length === 0 ? (
           <h1>Oops, something went wrong...</h1>
         ) : (
           <div className={styles.container}>

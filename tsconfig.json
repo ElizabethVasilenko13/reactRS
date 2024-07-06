@@ -21,6 +21,7 @@
       // "@shared/*": ["./src/shared/*"],
       // "@components/*": ["./components/*"],
       "@models/*": ["./src/models/*"]
+      // "@constants/*": ["./src/constants/*"]
     }
   },
   "include": ["src", ".eslintrc.cjs"],
