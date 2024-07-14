@@ -38,6 +38,7 @@ const Main: React.FC = () => {
         : `${MOVIES_API_URL}titles?page=${page}`;
     fetchData(apiUrl).then((data) => {
       setSearchResult(data.results);
+      console.log(data);
       setLoading(false);
       if (!data.next) {
         setIsLastPage(true);

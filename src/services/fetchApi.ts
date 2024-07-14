@@ -5,8 +5,14 @@ export const fetchData = async (apiUrl: string) => {
       headers: {
         'x-rapidapi-key': import.meta.env.VITE_MOVIES_API_KEY,
         'x-rapidapi-host': 'moviesdatabase.p.rapidapi.com',
+        'Cache-Control': 'no-cache',
       },
     });
+
+    if (response.status === 304) {
+      console.log('Data not modified');
+      return 'Data not modified';
+    }
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
