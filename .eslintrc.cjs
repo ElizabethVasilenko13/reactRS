@@ -23,7 +23,7 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
-    'max-len': ["error", { "code": 120 }],
+    'max-len': ['error', { code: 120 }],
     'arrow-body-style': ['off', 'never'],
     'react/jsx-no-useless-fragment': 'off',
     'react/prop-types': 'off',

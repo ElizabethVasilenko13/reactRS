@@ -24,8 +24,9 @@
       "@constants/*": ["./constants/*"],
       "@services/*": ["./services/*"],
       "@assets/*": ["./assets/*"],
-      "@hooks/*": ["./hooks/*"]
-
+      "@hooks/*": ["./hooks/*"],
+      "@pages/*": ["./pages/*"],
+      "@utils/*": ["./utils/*"]
     }
   },
   "include": ["src", ".eslintrc.cjs"],
