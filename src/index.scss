@@ -1,0 +1,23 @@
+body {
+  background-color: #d3dbdc;
+  font-family: 'Righteous', cursive;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 200px;
+}
+
+.app-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+h1 {
+  color: #3d314a;
+  text-align: center;
+}
+
+.error {
+  text-align: center;
+  margin: 40px auto;
+}

@@ -1,0 +1,31 @@
+{
+  "@typescript-eslint/no-explicit-any": "error",
+  "no-console": "off",
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@shared/*": ["./shared/*"],
+      "@components/*": ["./components/*"],
+      "@models/*": ["./models/*"],
+      "@constants/*": ["./constants/*"],
+      "@services/*": ["./services/*"],
+      "@assets/*": ["./assets/*"]
+    }
+  },
+  "include": ["src", ".eslintrc.cjs"],
+  "references": [{ "path": "./tsconfig.vite.json" }]
+}
