@@ -1,0 +1,34 @@
+.card {
+  background-color: #afd6d1;
+  border-radius: 20px;
+  width: 300px;
+  column-gap: 30px;
+  justify-self: center;
+}
+
+.image {
+  width: 100%;
+  height: 300px;
+}
+
+.image img {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movieInfo {
+  padding: 10px 10px 20px 10px;
+}
+
+h3 {
+  margin: 0;
+  width: fit-content;
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 0;
+}

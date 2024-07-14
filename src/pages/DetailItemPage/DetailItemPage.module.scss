@@ -1,0 +1,41 @@
+.detailPage {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 40%;
+  background-color: #1f1e1e;
+  height: 100%;
+
+  padding: 40px;
+
+  button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+    border-bottom-right-radius: 10px;
+  }
+}
+
+.year {
+  margin: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+img {
+  display: block;
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+  text-align: center;
+  margin: 0 auto;
+}
+
+h2 {
+  color: #fff;
+  text-align: center;
+}
