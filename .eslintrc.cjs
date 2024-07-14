@@ -40,5 +40,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     'object-curly-newline': 'off',
+    'react-hooks/exhaustive-deps': 'off', 
+    'no-restricted-globals': 'off'
   },
 };
