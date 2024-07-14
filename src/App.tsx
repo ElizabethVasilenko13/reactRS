@@ -4,24 +4,21 @@ import { MovieApiResp } from '@models/movie-api.interface';
 import SearchBar from '@components/SearchBar/SearchBar';
 import SearchResults from '@components/SearchResults/SearchResults';
 import { fetchData } from '@services/fetchApi';
-import {
-  MOVIES_API_URL,
-  MOVIES_TITLE_SEARCH_ENDPOINT,
-} from '@constants/api.constants';
+import { MOVIES_API_URL, MOVIES_TITLE_SEARCH_ENDPOINT } from '@constants/api.constants';
+import { useLocalStorage } from '@hooks/useLocalStorage';
 
 const App: React.FC = () => {
   const [searchResult, setSearchResult] = useState<MovieApiResp[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [startSearchQuery, setStartSearchQuery] = useState<string>('');
+  const [localStorageData, setLocalStorageData] = useLocalStorage('searchQuery', '');
 
   useEffect(() => {
-    const savedSearchQuery = localStorage.getItem('searchQuery') || '';
-    setStartSearchQuery(savedSearchQuery);
-    fetchSearchResultsAndUpdateState(savedSearchQuery);
-  }, []);
+    fetchSearchResultsAndUpdateState(localStorageData);
+  }, [localStorageData]);
 
   const handleSearch = (searchQuery: string) => {
     setLoading(true);
+    setLocalStorageData(searchQuery);
     fetchSearchResultsAndUpdateState(searchQuery);
   };
 
@@ -39,7 +36,7 @@ const App: React.FC = () => {
   return (
     <div className="app-container">
       <h1>Movies</h1>
-      <SearchBar onSearch={handleSearch} startSearchQuery={startSearchQuery} />
+      <SearchBar onSearch={handleSearch} startSearchQuery={localStorageData} />
       {loading ? <Loader /> : <SearchResults searchResult={searchResult} />}
     </div>
   );

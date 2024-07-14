@@ -15,10 +15,7 @@ module.exports = {
     project: ['./tsconfig.json', 'tsconfig.vite.json'],
   },
   rules: {
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
+    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'react/function-component-definition': [
       'error',
       {
@@ -26,6 +23,7 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
+    'max-len': ["error", { "code": 120 }],
     'arrow-body-style': ['off', 'never'],
     'react/jsx-no-useless-fragment': 'off',
     'react/prop-types': 'off',
