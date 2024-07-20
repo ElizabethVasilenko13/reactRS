@@ -1,9 +1,11 @@
 export const fetchData = async (apiUrl: string) => {
+  const apiKey = process.env.VITE_MOVIES_API_KEY || '';
+
   try {
     const response = await fetch(apiUrl, {
       method: 'GET',
       headers: {
-        'x-rapidapi-key': import.meta.env.VITE_MOVIES_API_KEY,
+        'x-rapidapi-key': apiKey,
         'x-rapidapi-host': 'moviesdatabase.p.rapidapi.com',
         'Cache-Control': 'no-cache',
       },

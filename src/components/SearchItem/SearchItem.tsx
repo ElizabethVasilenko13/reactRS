@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { MovieApiResp } from '@models/movie-api.interface';
 import { useNavigate } from 'react-router-dom';
-import noImage from '@assets/no-image.jpg';
+import noImage from '../../assets/no-image.jpg';
 import styles from './SearchItem.module.scss';
 
 type SearchItemProps = {

@@ -16,6 +16,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
     "baseUrl": "./src",
     "paths": {
       "@shared/*": ["./shared/*"],
@@ -29,6 +30,6 @@
       "@utils/*": ["./utils/*"]
     }
   },
-  "include": ["src", ".eslintrc.cjs"],
+  "include": ["src", ".eslintrc.cjs", "jest.setup.ts"],
   "references": [{ "path": "./tsconfig.vite.json" }]
 }

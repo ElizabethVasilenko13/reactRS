@@ -52,6 +52,7 @@ const DetailItemPage: React.FC = () => {
       <button type="button" onClick={handleClose}>
         &#x2717;
       </button>
+      <div>item</div>
       {movieData ? (
         <div>
           <h2>{movieData.titleText.text}</h2>

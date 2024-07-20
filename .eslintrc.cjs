@@ -7,10 +7,11 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:jest/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'react', 'react-compiler', 'react-refresh'],
+  plugins: ['@typescript-eslint', 'react', 'react-compiler', 'react-refresh', 'prettier', 'jest'],
   parserOptions: {
     project: ['./tsconfig.json', 'tsconfig.vite.json'],
   },
@@ -40,7 +41,8 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     'object-curly-newline': 'off',
-    'react-hooks/exhaustive-deps': 'off', 
-    'no-restricted-globals': 'off'
+    'react-hooks/exhaustive-deps': 'off',
+    'no-restricted-globals': 'off',
+    'jest/no-commented-out-tests': 'off',
   },
 };
