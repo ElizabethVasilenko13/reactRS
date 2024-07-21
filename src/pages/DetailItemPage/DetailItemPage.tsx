@@ -1,21 +1,27 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import { MOVIES_API_URL } from '@constants/api.constants';
+import { API_CHARACTER_ENDPOINT, RICK_AND_MORTY_API_URL } from '@constants/api.constants';
 import { fetchData } from '@services/fetchApi';
-import { MovieApiResp } from '@models/movie-api.interface';
+import { CharacterInfo } from '@models/rick-and-morty-api.interface';
 import styles from './DetailItemPage.module.scss';
 
 const DetailItemPage: React.FC = () => {
   const navigate = useNavigate();
   const detailPageRef = useRef<HTMLDivElement>(null);
   const { id } = useParams();
-  const [movieData, setMovieData] = useState<MovieApiResp | null>(null);
+  const [characterData, setCharacterData] = useState<CharacterInfo | null>(null);
 
-  const fetchMovieData = () => {
-    const apiUrl = `${MOVIES_API_URL}titles/${id}`;
-    fetchData(apiUrl).then((data) => {
-      setMovieData(data.results);
-    });
+  const fetchMovieData = async () => {
+    const apiUrl = `${RICK_AND_MORTY_API_URL}${API_CHARACTER_ENDPOINT}/${id}`;
+    const data = await fetchData<CharacterInfo>(apiUrl);
+
+    if (typeof data === 'string' || data instanceof Error) {
+      // Handle error or status messages appropriately here
+      console.error(data);
+      return;
+    }
+
+    setCharacterData(data);
   };
 
   useEffect(() => {
@@ -53,11 +59,10 @@ const DetailItemPage: React.FC = () => {
         &#x2717;
       </button>
       <div>item</div>
-      {movieData ? (
+      {characterData ? (
         <div>
-          <h2>{movieData.titleText.text}</h2>
-          {movieData.primaryImage && <img src={movieData.primaryImage.url} alt="Movie" />}
-          <div className={styles.year}> {movieData.releaseYear && `Release year ${movieData.releaseYear.year}`}</div>
+          <h2>{characterData.name}</h2>
+          <img src={characterData.image} alt="Movie" />
         </div>
       ) : (
         <h2>No additional data about this movie</h2>

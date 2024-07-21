@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import Loader from '@shared/Loader/Loader';
-import { MovieApiResp } from '@models/movie-api.interface';
+import { CharacterInfo, RickAndMortyApiResp } from '@models/rick-and-morty-api.interface';
 import SearchBar from '@components/SearchBar/SearchBar';
 import SearchResults from '@components/SearchResults/SearchResults';
 import { fetchData } from '@services/fetchApi';
-import { MOVIES_API_URL, MOVIES_TITLE_SEARCH_ENDPOINT } from '@constants/api.constants';
+import { API_CHARACTER_ENDPOINT, RICK_AND_MORTY_API_URL } from '@constants/api.constants';
 import { useLocalStorage } from '@hooks/useLocalStorage';
 import Pagination from '@components/Pagination/Pagination';
 import { useSearchParams } from 'react-router-dom';
 
 const Main: React.FC = () => {
-  const [searchResult, setSearchResult] = useState<MovieApiResp[]>([]);
+  const [searchResult, setSearchResult] = useState<CharacterInfo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [localStorageData, setLocalStorageData] = useLocalStorage('searchQuery', '');
   const [isLastPage, setIsLastPage] = useState(false);
@@ -30,26 +30,36 @@ const Main: React.FC = () => {
     setCurrentPage(1);
   };
 
-  const fetchSearchResultsAndUpdateState = (searchQuery: string, page: number) => {
+  const fetchSearchResultsAndUpdateState = async (searchQuery: string, page: number) => {
     setLoading(true);
-    const apiUrl =
-      searchQuery.length > 0
-        ? `${MOVIES_API_URL}${MOVIES_TITLE_SEARCH_ENDPOINT}${searchQuery}?exact=false&titleType=movie&page=${page}`
-        : `${MOVIES_API_URL}titles?page=${page}`;
-    fetchData(apiUrl).then((data) => {
+    const apiUrl = `${RICK_AND_MORTY_API_URL}${API_CHARACTER_ENDPOINT}?name=${searchQuery}&page=${page}`;
+
+    try {
+      const data = await fetchData<RickAndMortyApiResp>(apiUrl);
+
+      if (typeof data === 'string' || data instanceof Error) {
+        console.error(data);
+        setLoading(false);
+        return;
+      }
+
       setSearchResult(data.results);
       setLoading(false);
-      if (!data.next) {
+
+      if (!data.info.next) {
         setIsLastPage(true);
       } else {
         setIsLastPage(false);
       }
-    });
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
   };
 
   return (
     <>
-      <h1>Movies</h1>
+      <h1>Rick and Morty</h1>
       <SearchBar onSearch={handleSearch} startSearchQuery={localStorageData} />
       {loading ? (
         <Loader />

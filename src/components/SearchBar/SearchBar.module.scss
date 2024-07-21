@@ -8,10 +8,16 @@
 
 .form input {
   width: 70%;
-  background-color: #f5f5f5;
   filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.1));
+  background-color: rgb(78 77 72 / 78%);
   margin-right: 20px;
   padding: 3px 0px 3px 15px;
+  border: 2px solid #e89ac7;
+  color: #e89ac7;
+
+  &::placeholder {
+    color: #e89ac7;
+  }
 }
 
 input,
@@ -24,7 +30,7 @@ button {
 
 button {
   padding: 10px;
-  background-color: #00f7ff;
+  background-color: #97ce4c;
   cursor: pointer;
 }
 

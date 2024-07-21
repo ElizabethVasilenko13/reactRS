@@ -1,9 +1,9 @@
 import SearchItem from '@components/SearchItem/SearchItem';
-import { MovieApiResp } from '@models/movie-api.interface';
+import { CharacterInfo } from '@models/rick-and-morty-api.interface';
 import styles from './SearchResults.module.scss';
 
 type SearchResultsProps = {
-  searchResult: MovieApiResp[];
+  searchResult: CharacterInfo[];
 };
 
 const SearchResults: React.FC<SearchResultsProps> = ({ searchResult }) => {
@@ -13,8 +13,8 @@ const SearchResults: React.FC<SearchResultsProps> = ({ searchResult }) => {
         <h1>Oops, something went wrong...</h1>
       ) : (
         <div className={styles.container}>
-          {searchResult.map((searchItem: MovieApiResp) => (
-            <SearchItem key={searchItem.id} movie={searchItem} />
+          {searchResult.map((searchItem: CharacterInfo) => (
+            <SearchItem key={searchItem.id} item={searchItem} />
           ))}
         </div>
       )}
