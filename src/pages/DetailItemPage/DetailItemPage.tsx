@@ -29,7 +29,6 @@ const DetailItemPage: React.FC = () => {
     }
   }, [id]);
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
     const handleClickOutside = (event: MouseEvent) => {
       if (detailPageRef.current && !detailPageRef.current.contains(event.target as Node)) {
         handleClose();
@@ -38,8 +37,6 @@ const DetailItemPage: React.FC = () => {
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.body.style.overflow = '';
-
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
@@ -57,14 +54,28 @@ const DetailItemPage: React.FC = () => {
       <button type="button" onClick={handleClose}>
         &#x2717;
       </button>
-      <div>item</div>
       {characterData ? (
-        <div>
+        <>
           <h2>{characterData.name}</h2>
           <img src={characterData.image} alt="Movie" />
-        </div>
+          <div className={styles.data}>
+            <p>
+              {' '}
+              <b>Species:</b> {characterData.species}
+            </p>
+            <p>
+              <b>Gender:</b> {characterData.gender}
+            </p>
+            <p>
+              <b>Location:</b> {characterData.location.name}
+            </p>
+            <p>
+              <b>Status:</b> {characterData.status}
+            </p>
+          </div>
+        </>
       ) : (
-        <h2>No additional data about this movie</h2>
+        <h2>No additional data about this character</h2>
       )}
     </div>
   );

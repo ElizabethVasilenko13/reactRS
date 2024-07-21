@@ -7,7 +7,8 @@ import { fetchData } from '@services/fetchApi';
 import { API_CHARACTER_ENDPOINT, RICK_AND_MORTY_API_URL } from '@constants/api.constants';
 import { useLocalStorage } from '@hooks/useLocalStorage';
 import Pagination from '@components/Pagination/Pagination';
-import { useSearchParams } from 'react-router-dom';
+import { Outlet, useSearchParams } from 'react-router-dom';
+import styles from './Main.module.scss';
 
 const Main: React.FC = () => {
   const [searchResult, setSearchResult] = useState<CharacterInfo[]>([]);
@@ -66,7 +67,10 @@ const Main: React.FC = () => {
       ) : (
         <>
           <Pagination currentPage={currentPage} onPageChange={setCurrentPage} isLastPage={isLastPage} />
-          <SearchResults searchResult={searchResult} />
+          <div className={styles.container}>
+            <SearchResults searchResult={searchResult} />
+            <Outlet />
+          </div>
         </>
       )}
     </>

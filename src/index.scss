@@ -1,5 +1,5 @@
 body {
-  background-color: #44281d;
+  background-color: #120e22;
   background-image: url('./assets/space.jpg');
   font-family: 'Righteous', cursive;
   display: flex;
@@ -10,8 +10,8 @@ body {
 }
 
 .app-container {
-  max-width: 1000px;
   margin: 0 auto;
+  width: 80%;
 }
 
 h1 {
