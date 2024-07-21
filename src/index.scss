@@ -6,6 +6,7 @@ body {
   flex-direction: column;
   height: 100vh;
   min-height: 200px;
+  margin: 0;
 }
 
 .app-container {
@@ -21,4 +22,5 @@ h1 {
 .error {
   text-align: center;
   margin: 40px auto;
+  color: white;
 }

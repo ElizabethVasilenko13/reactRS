@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import DetailItemPage from '@pages/DetailItemPage/DetailItemPage';
+import NotFound from '@pages/NotFound/NotFound';
 import App from '../App';
 
 export const router = createBrowserRouter([
@@ -12,5 +13,9 @@ export const router = createBrowserRouter([
         element: <DetailItemPage />,
       },
     ],
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   },
 ]);

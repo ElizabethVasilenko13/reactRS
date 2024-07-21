@@ -6,6 +6,15 @@
   background-color: #1f1e1e;
   height: 100%;
 
+  img {
+    display: block;
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+    text-align: center;
+    margin: 0 auto;
+  }
+
   padding: 40px;
 
   button {
@@ -26,14 +35,7 @@
   color: #fff;
 }
 
-img {
-  display: block;
-  height: 300px;
-  width: 300px;
-  object-fit: cover;
-  text-align: center;
-  margin: 0 auto;
-}
+
 
 h2 {
   color: #fff;

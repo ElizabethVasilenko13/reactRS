@@ -1,0 +1,20 @@
+.rick {
+  height: 400px;
+  object-fit: contain;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    height: 400px;
+    background-color: transparent;
+    cursor: pointer;
+    img {
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}

@@ -2,6 +2,7 @@ import { Component, ErrorInfo, ReactNode } from 'react';
 
 type ErrorBoundaryProps = {
   children?: ReactNode;
+  fallback?: ReactNode;
 };
 
 type ErrorBoundaryState = {
@@ -24,10 +25,12 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="error">
-          <h1>Sorry.. there was an error</h1>
-          <p>Plase reload the page</p>
-        </div>
+        this.props.fallback || (
+          <div className="error">
+            <h1>Sorry.. there was an error</h1>
+            <p>Please reload the page</p>
+          </div>
+        )
       );
     }
 

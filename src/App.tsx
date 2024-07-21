@@ -1,11 +1,14 @@
+import ErrorBoundary from '@shared/ErrorBoundary/ErrorBoundary';
 import Main from '@pages/Main/Main';
 import { Outlet } from 'react-router-dom';
 
 const App: React.FC = () => {
   return (
     <div className="app-container">
-      <Main />
-      <Outlet />
+      <ErrorBoundary>
+        <Main />
+        <Outlet />
+      </ErrorBoundary>
     </div>
   );
 };

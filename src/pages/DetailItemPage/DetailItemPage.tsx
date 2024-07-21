@@ -16,7 +16,6 @@ const DetailItemPage: React.FC = () => {
     const data = await fetchData<CharacterInfo>(apiUrl);
 
     if (typeof data === 'string' || data instanceof Error) {
-      // Handle error or status messages appropriately here
       console.error(data);
       return;
     }
