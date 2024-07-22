@@ -14,10 +14,6 @@ export const useLocalStorage = <T>(key: string, initialValue: T) => {
 
   useEffect(() => {
     saveLocalStorageData(key, localStorageData);
-
-    return () => {
-      saveLocalStorageData(key, localStorageData);
-    };
   }, [key, localStorageData]);
 
   return [localStorageData, setLocalStorageData];

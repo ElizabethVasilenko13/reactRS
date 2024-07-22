@@ -15,7 +15,7 @@ const SearchItem: React.FC<SearchItemProps> = ({ item }) => {
   return (
     <button type="button" className={styles.card} onClick={navigateToDetailPage}>
       <div className={styles.image}>
-        <img src={item.image} alt="Movie" />
+        <img src={item.image} alt="Character" />
       </div>
       <div className={styles.movieInfo}>
         <h3>{item.name}</h3>

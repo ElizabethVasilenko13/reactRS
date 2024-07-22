@@ -31,6 +31,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, startSearchQuery }) => 
     <div>
       <form className={styles.form}>
         <input
+          data-testid="search-input"
           className={styles.input}
           type="text"
           placeholder="Search..."

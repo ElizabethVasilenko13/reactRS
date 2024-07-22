@@ -23,7 +23,11 @@ const Main: React.FC = () => {
   useEffect(() => {
     fetchSearchResultsAndUpdateState(localStorageData, currentPage);
     setSearchParams({ query: localStorageData, page: currentPage.toString() });
-  }, [localStorageData, currentPage, setSearchParams]);
+  }, [localStorageData, currentPage]);
+
+  useEffect(() => {
+    setSearchParams({ query: localStorageData, page: currentPage.toString() });
+  }, [setSearchParams]);
 
   const handleSearch = (searchQuery: string) => {
     setLocalStorageData(searchQuery);

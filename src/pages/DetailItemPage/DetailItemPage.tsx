@@ -11,7 +11,7 @@ const DetailItemPage: React.FC = () => {
   const { id } = useParams();
   const [characterData, setCharacterData] = useState<CharacterInfo | null>(null);
 
-  const fetchMovieData = async () => {
+  const fetchCharacterData = async () => {
     const apiUrl = `${RICK_AND_MORTY_API_URL}${API_CHARACTER_ENDPOINT}/${id}`;
     const data = await fetchData<CharacterInfo>(apiUrl);
 
@@ -25,9 +25,10 @@ const DetailItemPage: React.FC = () => {
 
   useEffect(() => {
     if (id) {
-      fetchMovieData();
+      fetchCharacterData();
     }
   }, [id]);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (detailPageRef.current && !detailPageRef.current.contains(event.target as Node)) {
@@ -42,7 +43,6 @@ const DetailItemPage: React.FC = () => {
   }, []);
 
   const handleClose = () => {
-    document.body.style.overflow = '';
     const currentQueryParams = new URLSearchParams(location.search);
     navigate({
       pathname: '/',
@@ -57,19 +57,19 @@ const DetailItemPage: React.FC = () => {
       {characterData ? (
         <>
           <h2>{characterData.name}</h2>
-          <img src={characterData.image} alt="Movie" />
+          <img src={characterData.image} alt="Character" />
           <div className={styles.data}>
-            <p>
+            <p data-testid="species">
               {' '}
               <b>Species:</b> {characterData.species}
             </p>
-            <p>
+            <p data-testid="gender">
               <b>Gender:</b> {characterData.gender}
             </p>
-            <p>
+            <p data-testid="location">
               <b>Location:</b> {characterData.location.name}
             </p>
-            <p>
+            <p data-testid="status">
               <b>Status:</b> {characterData.status}
             </p>
           </div>
