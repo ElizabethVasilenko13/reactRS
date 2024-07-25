@@ -27,7 +27,9 @@
       "@assets/*": ["./assets/*"],
       "@hooks/*": ["./hooks/*"],
       "@pages/*": ["./pages/*"],
-      "@utils/*": ["./utils/*"]
+      "@utils/*": ["./utils/*"],
+      "@store/*": ["./store/*"]
+
     }
   },
   "include": ["src", ".eslintrc.cjs", "jest.setup.ts"],

@@ -1,19 +1,21 @@
-import { screen, fireEvent, act, waitFor } from '@testing-library/react';
+import { screen, act, waitFor, fireEvent } from '@testing-library/react';
 import { jest } from '@jest/globals';
 import { customRoutingRender } from '@utils/test-utils';
 import { fetchData } from '@services/fetchApi';
 import { mockSearchResults } from '../../__mocks__/serachResult';
-import DetailItemPage from './DetailItemPage';
+import DetailItemPage from './DetailItem';
 
 jest.mock('@services/fetchApi', () => ({
   fetchData: jest.fn() as jest.MockedFunction<typeof fetchData>,
 }));
 
 const mockNavigate = jest.fn();
+
 const mockData = mockSearchResults[0];
 jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
   useParams: () => ({ id: '1' }),
+  useLocation: () => ({ search: '' }),
 }));
 
 describe('DetailItemPage Component', () => {

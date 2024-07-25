@@ -10,8 +10,9 @@ export interface Info {
   prev: string | null;
 }
 
+export type CharacterId = string;
 export interface CharacterInfo {
-  id: number;
+  id: CharacterId;
   name: string;
   status: string;
   species: string;

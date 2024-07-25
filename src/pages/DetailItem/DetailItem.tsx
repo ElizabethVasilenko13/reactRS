@@ -1,33 +1,18 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
-import { API_CHARACTER_ENDPOINT, RICK_AND_MORTY_API_URL } from '@constants/api.constants';
-import { fetchData } from '@services/fetchApi';
-import { CharacterInfo } from '@models/rick-and-morty-api.interface';
-import styles from './DetailItemPage.module.scss';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { usersApi } from '@store/api/cardsApi';
+import Loader from '@shared/Loader/Loader';
+import { CharacterId } from '@models/rick-and-morty-api.interface';
+import { skipToken } from '@reduxjs/toolkit/query';
+import styles from './DetailItem.module.scss';
 
 const DetailItemPage: React.FC = () => {
   const navigate = useNavigate();
   const detailPageRef = useRef<HTMLDivElement>(null);
-  const { id } = useParams();
-  const [characterData, setCharacterData] = useState<CharacterInfo | null>(null);
+  const { id } = useParams<{ id: CharacterId }>();
+  const location = useLocation();
 
-  const fetchCharacterData = async () => {
-    const apiUrl = `${RICK_AND_MORTY_API_URL}${API_CHARACTER_ENDPOINT}/${id}`;
-    const data = await fetchData<CharacterInfo>(apiUrl);
-
-    if (typeof data === 'string' || data instanceof Error) {
-      console.error(data);
-      return;
-    }
-
-    setCharacterData(data);
-  };
-
-  useEffect(() => {
-    if (id) {
-      fetchCharacterData();
-    }
-  }, [id]);
+  const { data: characterData, isFetching: cardFetching } = usersApi.useGetCardQuery(id ?? skipToken);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -43,12 +28,16 @@ const DetailItemPage: React.FC = () => {
   }, []);
 
   const handleClose = () => {
-    const currentQueryParams = new URLSearchParams(location.search);
     navigate({
       pathname: '/',
-      search: currentQueryParams.toString(),
+      search: location.search,
     });
   };
+
+  if (cardFetching) {
+    return <Loader />;
+  }
+
   return (
     <div className={styles.detailPage} ref={detailPageRef}>
       <button type="button" onClick={handleClose}>
