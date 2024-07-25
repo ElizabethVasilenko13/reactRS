@@ -3,6 +3,7 @@ import Loader from '@shared/Loader/Loader';
 import SearchBar from '@components/SearchBar/SearchBar';
 import SearchResults from '@components/SearchResults/SearchResults';
 import Pagination from '@components/Pagination/Pagination';
+import Flyout from '@components/Flyout/Flyout';
 import { Outlet, useSearchParams } from 'react-router-dom';
 import { usersApi } from '@store/api/cardsApi';
 import { useAppSelector } from '@store/store';
@@ -45,6 +46,7 @@ const Main: React.FC = () => {
     <>
       <h1>Rick and Morty</h1>
       <SearchBar onSearch={handleSearch} />
+      <Flyout />
       {cardsFetching ? (
         <Loader />
       ) : (
