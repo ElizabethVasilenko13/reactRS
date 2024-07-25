@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { baseCardsApi } from './api/baseCardsApi';
+import { searchReducer } from './search/search.slice';
 
 export const store = configureStore({
   reducer: {
+    search: searchReducer,
     [baseCardsApi.reducerPath]: baseCardsApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(baseCardsApi.middleware),

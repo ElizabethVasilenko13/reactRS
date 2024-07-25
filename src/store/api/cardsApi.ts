@@ -5,7 +5,7 @@ import { baseCardsApi } from './baseCardsApi';
 export const usersApi = baseCardsApi.injectEndpoints({
   endpoints: (create) => ({
     getCards: create.query<RickAndMortyApiResp, { name: string; page: number }>({
-      query: ({ name, page }) => `${API_CHARACTER_ENDPOINT}?name=${name}&page=${page}`,
+      query: ({ name, page = 1 }) => `${API_CHARACTER_ENDPOINT}?name=${name}&page=${page}`,
       // providesTags: ["Users", { type: "Users", id: "LIST" }],
       // transformResponse: (res: unknown) => UserDtoSchema.array().parse(res),
     }),

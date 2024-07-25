@@ -1,18 +1,18 @@
-import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
+import { ChangeEvent, MouseEvent, useState } from 'react';
+import { useAppDispath, useAppSelector } from '@store/store';
+import { saveSearchTerm } from '@store/search/search.slice';
+import { saveLocalStorageData } from '@utils/local-storage';
 import styles from './SearchBar.module.scss';
 
 type SearchBarProps = {
-  onSearch: (searchQuery: string) => void;
-  startSearchQuery: string;
+  onSearch: (params: { page: number }) => void;
 };
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch, startSearchQuery }) => {
-  const [searchQuery, setSearchQuery] = useState<string>(startSearchQuery || '');
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
+  const baseSearchQuery = useAppSelector((state) => state.search.searchCharacterTerm);
+  const [searchQuery, setSearchQuery] = useState<string>(baseSearchQuery);
   const [isError, setIsError] = useState<boolean>(false);
-
-  useEffect(() => {
-    setSearchQuery(startSearchQuery);
-  }, [startSearchQuery]);
+  const dispatch = useAppDispath();
 
   const handleInput = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(value);
@@ -20,7 +20,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, startSearchQuery }) => 
 
   const handleSearch = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    onSearch(searchQuery.trim());
+    onSearch({ page: 1 });
+    saveLocalStorageData('searchQuery', searchQuery.trim());
+    dispatch(saveSearchTerm(searchQuery.trim()));
   };
 
   const handleError = () => {

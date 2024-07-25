@@ -48,4 +48,12 @@ module.exports = {
     'no-restricted-globals': 'off',
     'jest/no-commented-out-tests': 'off',
   },
+  overrides: [
+    {
+      files: ['src/store/**/*.ts', 'src/store/**/*.tsx'],
+      rules: {
+        'no-param-reassign': 'off',
+      },
+    },
+  ],
 };

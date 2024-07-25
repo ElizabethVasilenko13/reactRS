@@ -1,29 +1,22 @@
 import styles from './Pagination.module.scss';
 
 type PaginationProps = {
-  onPageChange: (pageNum: number) => void;
-  currentPage: number;
-  isLastPage: boolean;
+  pageInfo: { page: number; totalPages: number };
+  onPageChange: (params: { page: number }) => void;
 };
 
-const Pagination: React.FC<PaginationProps> = ({ currentPage, onPageChange, isLastPage }) => {
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      onPageChange(currentPage - 1);
-    }
-  };
-
-  const handleNextPage = () => {
-    onPageChange(currentPage + 1);
+const Pagination: React.FC<PaginationProps> = ({ pageInfo: { page, totalPages }, onPageChange }) => {
+  const handlePageChange = (newPageNum: number) => {
+    onPageChange({ page: newPageNum });
   };
 
   return (
     <div className={styles.pagination}>
-      <button type="button" disabled={currentPage === 1} onClick={handlePreviousPage}>
+      <button type="button" disabled={page === 1} onClick={() => handlePageChange(page - 1)}>
         &lt;
       </button>
-      {currentPage}
-      <button type="button" disabled={isLastPage} onClick={handleNextPage}>
+      {page}
+      <button type="button" disabled={page === totalPages} onClick={() => handlePageChange(page + 1)}>
         &gt;
       </button>
     </div>
