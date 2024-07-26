@@ -1,15 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactElement } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { Theme, ThemeContext } from '@context/ThemeContext';
 import { Provider } from 'react-redux';
-import { setupStore, store as defaultStore } from '@store/store';
+import { setupStore, store as defaultStore, AppStore, RootState } from '@store/store';
 
-// Define a type for extended render options, including optional store and preloadedState
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
-  preloadedState?: any;
-  store?: any;
+  preloadedState?: Partial<RootState>;
+  store?: AppStore;
   providerProps?: { theme: Theme; toggleTheme: () => void };
 }
 
