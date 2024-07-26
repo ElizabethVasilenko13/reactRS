@@ -4,14 +4,18 @@ import SearchBar from '@components/SearchBar/SearchBar';
 import SearchResults from '@components/SearchResults/SearchResults';
 import Pagination from '@components/Pagination/Pagination';
 import Flyout from '@components/Flyout/Flyout';
+import ThemeSwitcher from '@components/ThemeSwitcher/ThemeSwitcher';
 import { Outlet, useSearchParams } from 'react-router-dom';
 import { usersApi } from '@store/api/cardsApi';
 import { useAppSelector } from '@store/store';
+import { useTheme } from '@context/ThemeContext';
+import classNames from 'classnames';
 import styles from './Main.module.scss';
 
 const Main: React.FC = () => {
   const baseSearchQuery = useAppSelector((state) => state.search.searchCharacterTerm);
   const [searchParams, setSearchParams] = useSearchParams();
+  const { theme } = useTheme();
   const currentPageParam = parseInt(searchParams.get('page') || '1', 10);
   const [pagination, setPagination] = useState({ page: currentPageParam, totalPages: currentPageParam });
 
@@ -44,7 +48,8 @@ const Main: React.FC = () => {
 
   return (
     <>
-      <h1>Rick and Morty</h1>
+      <h1 className={classNames(styles.header, styles[theme])}>Rick and Morty</h1>
+      <ThemeSwitcher />
       <SearchBar onSearch={handleSearch} />
       <Flyout />
       {cardsFetching ? (

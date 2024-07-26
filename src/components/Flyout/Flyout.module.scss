@@ -17,14 +17,25 @@
   button,
   a {
     background-color: #e89ac7;
+    border-radius: 20px;
+    padding: 10px;
+    border: none;
   }
 
   a {
     display: block;
-    padding: 10px;
     cursor: pointer;
-    border-radius: 20px;
     color: black;
     text-decoration: none;
+  }
+
+  &.light {
+    background-color: #2e00ff;
+    color: #fff;
+
+    button,
+    a {
+      background-color: white;
+    }
   }
 }

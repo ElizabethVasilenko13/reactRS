@@ -1,3 +1,5 @@
+import { useTheme } from '@context/ThemeContext';
+import classNames from 'classnames';
 import styles from './Pagination.module.scss';
 
 type PaginationProps = {
@@ -6,12 +8,13 @@ type PaginationProps = {
 };
 
 const Pagination: React.FC<PaginationProps> = ({ pageInfo: { page, totalPages }, onPageChange }) => {
+  const { theme } = useTheme();
   const handlePageChange = (newPageNum: number) => {
     onPageChange({ page: newPageNum });
   };
 
   return (
-    <div className={styles.pagination}>
+    <div className={classNames(styles.pagination, styles[theme])}>
       <button type="button" disabled={page === 1} onClick={() => handlePageChange(page - 1)}>
         &lt;
       </button>

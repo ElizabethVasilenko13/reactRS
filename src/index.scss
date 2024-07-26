@@ -1,12 +1,22 @@
 body {
   background-color: #120e22;
   background-image: url('./assets/space.jpg');
+  background-size: contain;
   font-family: 'Righteous', cursive;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  min-height: 200px;
-  margin: 0;
+  margin: 0 0 50px 0;
+
+  &.light {
+    background: #74ebd5; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #acb6e5, #74ebd5); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to right,
+      #acb6e5,
+      #74ebd5
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
 }
 
 .app-container {
@@ -23,4 +33,12 @@ h1 {
   text-align: center;
   margin: 40px auto;
   color: white;
+}
+
+button {
+  font-family: 'Righteous', cursive;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
 }

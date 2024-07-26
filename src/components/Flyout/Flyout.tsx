@@ -3,10 +3,13 @@ import { useDispatch } from 'react-redux';
 import { unselectAll } from '@store/cards/cards.slice';
 import { convertToCSV } from '@utils/convert-to-CSV';
 import { CharacterInfo } from '@models/rick-and-morty-api.interface';
+import { useTheme } from '@context/ThemeContext';
+import classNames from 'classnames';
 import styles from './Flyout.module.scss';
 
 const Flyout: React.FC = () => {
   const dispatch = useDispatch();
+  const { theme } = useTheme();
   const selectedCards = useAppSelector((state) => state.cards.selectedCards);
   const selectedCardsCount = Object.keys(selectedCards).length;
 
@@ -22,7 +25,7 @@ const Flyout: React.FC = () => {
   const downloadFileName = `${selectedCardsCount}_character${selectedCardsCount > 1 ? 's' : ''}.csv`;
 
   return (
-    <div className={styles.flyout}>
+    <div className={classNames(styles.flyout, styles[theme])}>
       <button type="button" onClick={handleUnselectAll}>
         Unselect All
       </button>

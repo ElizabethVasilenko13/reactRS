@@ -2,6 +2,8 @@ import { ChangeEvent, MouseEvent, useState } from 'react';
 import { useAppDispath, useAppSelector } from '@store/store';
 import { saveSearchTerm } from '@store/search/search.slice';
 import { saveLocalStorageData } from '@utils/local-storage';
+import { useTheme } from '@context/ThemeContext';
+import classNames from 'classnames';
 import styles from './SearchBar.module.scss';
 
 type SearchBarProps = {
@@ -12,6 +14,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const baseSearchQuery = useAppSelector((state) => state.search.searchCharacterTerm);
   const [searchQuery, setSearchQuery] = useState<string>(baseSearchQuery);
   const [isError, setIsError] = useState<boolean>(false);
+  const { theme } = useTheme();
   const dispatch = useAppDispath();
 
   const handleInput = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
@@ -30,8 +33,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   };
 
   return (
-    <div>
-      <form className={styles.form}>
+    <div className={classNames(styles.container, styles[theme])}>
+      <form>
         <input
           data-testid="search-input"
           className={styles.input}

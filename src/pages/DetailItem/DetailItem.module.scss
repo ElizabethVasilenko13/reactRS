@@ -24,15 +24,26 @@
     border-radius: 0;
     border-top-right-radius: 10px;
     border-bottom-left-radius: 10px;
+    border: none;
+    background-color: #97ce4c;
+    height: 40px;
+    width: 35px;
   }
-}
 
-.data {
-  color: white;
-  margin-top: 20px;
-}
+  .data {
+    color: white;
+    margin-top: 20px;
+  }
 
-h2 {
-  color: #fff;
-  text-align: center;
+  h2 {
+    color: #fff;
+    text-align: center;
+  }
+
+  &.light {
+    background-color: rgb(174 119 175 / 50%);
+    button {
+      background-color: #f9ff3c;
+    }
+  }
 }

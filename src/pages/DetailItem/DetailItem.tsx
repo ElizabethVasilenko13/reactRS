@@ -4,6 +4,8 @@ import { usersApi } from '@store/api/cardsApi';
 import Loader from '@shared/Loader/Loader';
 import { CharacterId } from '@models/rick-and-morty-api.interface';
 import { skipToken } from '@reduxjs/toolkit/query';
+import { useTheme } from '@context/ThemeContext';
+import classNames from 'classnames';
 import styles from './DetailItem.module.scss';
 
 const DetailItemPage: React.FC = () => {
@@ -11,6 +13,7 @@ const DetailItemPage: React.FC = () => {
   const detailPageRef = useRef<HTMLDivElement>(null);
   const { id } = useParams<{ id: CharacterId }>();
   const location = useLocation();
+  const { theme } = useTheme();
 
   const { data: characterData, isFetching: cardFetching } = usersApi.useGetCardQuery(id ?? skipToken);
 
@@ -39,7 +42,7 @@ const DetailItemPage: React.FC = () => {
   }
 
   return (
-    <div className={styles.detailPage} ref={detailPageRef}>
+    <div className={classNames(styles.detailPage, styles[theme])} ref={detailPageRef}>
       <button type="button" onClick={handleClose}>
         &#x2717;
       </button>

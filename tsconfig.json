@@ -28,8 +28,8 @@
       "@hooks/*": ["./hooks/*"],
       "@pages/*": ["./pages/*"],
       "@utils/*": ["./utils/*"],
-      "@store/*": ["./store/*"]
-
+      "@store/*": ["./store/*"],
+      "@context/*": ["./context/*"]
     }
   },
   "include": ["src", ".eslintrc.cjs", "jest.setup.ts"],

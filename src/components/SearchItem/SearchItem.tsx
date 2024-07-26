@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { CharacterInfo } from '@models/rick-and-morty-api.interface';
 import { useAppDispath, useAppSelector } from '@store/store';
 import { select, unselect } from '@store/cards/cards.slice';
+import { useTheme } from '@context/ThemeContext';
+import classNames from 'classnames';
 import styles from './SearchItem.module.scss';
 
 type SearchItemProps = {
@@ -11,6 +13,7 @@ type SearchItemProps = {
 const SearchItem: React.FC<SearchItemProps> = ({ item }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispath();
+  const { theme } = useTheme();
 
   const selectedCard = useAppSelector((state) => state.cards.selectedCards[item.id]);
   const isChecked = !!selectedCard;
@@ -28,7 +31,7 @@ const SearchItem: React.FC<SearchItemProps> = ({ item }) => {
   };
 
   return (
-    <button type="button" className={styles.card} onClick={navigateToDetailPage}>
+    <button type="button" className={classNames(styles.card, styles[theme])} onClick={navigateToDetailPage}>
       <div className={styles.image}>
         <img src={item.image} alt="Character" />
       </div>
