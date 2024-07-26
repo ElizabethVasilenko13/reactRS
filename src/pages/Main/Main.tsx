@@ -34,29 +34,21 @@ const Main: React.FC = () => {
     }
   }, [cardsData]);
 
-  const updatePage = (newPage: number) => {
-    setPagination((prev) => ({ ...prev, page: newPage }));
-  };
-
-  const handleSearch = (params: { page: number }) => {
-    updatePage(params.page);
-  };
-
-  const handlePageChange = (params: { page: number }) => {
-    updatePage(params.page);
+  const updatePage = (params: { page: number }) => {
+    setPagination((prev) => ({ ...prev, page: params.page }));
   };
 
   return (
     <>
       <h1 className={classNames(styles.header, styles[theme])}>Rick and Morty</h1>
       <ThemeSwitcher />
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSearch={updatePage} />
       <Flyout />
       {cardsFetching ? (
         <Loader />
       ) : (
         <>
-          <Pagination pageInfo={pagination} onPageChange={handlePageChange} />
+          <Pagination pageInfo={pagination} onPageChange={updatePage} />
           <div className={styles.container}>
             <SearchResults searchResult={cardsData?.results ?? []} />
             <Outlet />

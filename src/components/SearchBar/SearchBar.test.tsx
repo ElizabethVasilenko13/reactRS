@@ -3,14 +3,13 @@ import SearchBar from './SearchBar';
 
 describe('SearchBar Component', () => {
   const onSearchMock = jest.fn();
-  const startSearchQuery = 'initialQuery';
 
   beforeEach(() => {
     localStorage.clear();
   });
 
   test('process Search button click', () => {
-    render(<SearchBar onSearch={onSearchMock} startSearchQuery={startSearchQuery} />);
+    render(<SearchBar onSearch={onSearchMock} />);
 
     const inputElement = screen.getByTestId('search-input');
     const searchButton = screen.getByText('Search');
