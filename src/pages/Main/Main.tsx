@@ -6,7 +6,7 @@ import Pagination from '@components/Pagination/Pagination';
 import Flyout from '@components/Flyout/Flyout';
 import ThemeSwitcher from '@components/ThemeSwitcher/ThemeSwitcher';
 import { Outlet, useSearchParams } from 'react-router-dom';
-import { usersApi } from '@store/api/cardsApi';
+import { cardsApi } from '@store/api/cardsApi';
 import { useAppSelector } from '@store/store';
 import { useTheme } from '@context/ThemeContext';
 import classNames from 'classnames';
@@ -19,7 +19,7 @@ const Main: React.FC = () => {
   const currentPageParam = parseInt(searchParams.get('page') || '1', 10);
   const [pagination, setPagination] = useState({ page: currentPageParam, totalPages: currentPageParam });
 
-  const { data: cardsData, isFetching: cardsFetching } = usersApi.useGetCardsQuery({
+  const { data: cardsData, isFetching: cardsFetching } = cardsApi.useGetCardsQuery({
     name: baseSearchQuery,
     page: pagination.page,
   });

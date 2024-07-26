@@ -1,50 +1,42 @@
-// import { fireEvent, render, screen } from '@testing-library/react';
-// import { MemoryRouter, useSearchParams } from 'react-router-dom';
-// import { customRoutingRender } from '@utils/test-utils';
-// import Pagination from './Pagination';
+import { fireEvent, screen } from '@testing-library/react';
+import { customRender } from '@utils/test-utils';
+import { Theme } from '@context/ThemeContext';
+import Pagination from './Pagination';
 
-// jest.mock('react-router-dom', () => ({
-//   ...jest.requireActual('react-router-dom'),
-//   useSearchParams: jest.fn(),
-// }));
+describe('Pagination Component', () => {
+  const handlePageChange = jest.fn();
 
-// describe('Pagination Component', () => {
-//   const setSearchParams = jest.fn();
+  const providerProps: { theme: Theme; toggleTheme: () => void } = {
+    theme: 'light',
+    toggleTheme: jest.fn(),
+  };
 
-//   beforeEach(() => {
-//     (useSearchParams as jest.Mock).mockReturnValue([new URLSearchParams(), setSearchParams]);
-//   });
+  const pageInfo = {
+    page: 1,
+    totalPages: 3,
+  };
 
-//   test('increase page num and chnage URL query parameter when page changes', () => {
-//     const handlePageChange = jest.fn();
+  test('increase page number and change URL query parameter when page changes', () => {
+    customRender(<Pagination pageInfo={pageInfo} onPageChange={handlePageChange} />, { providerProps });
 
-//     render(
-//       <MemoryRouter initialEntries={['/']}>
-//         <Pagination currentPage={1} onPageChange={handlePageChange} isLastPage={false} />
-//       </MemoryRouter>
-//     );
+    fireEvent.click(screen.getByText('>'));
+    expect(handlePageChange).toHaveBeenCalledWith({ page: 2 });
+  });
 
-//     fireEvent.click(screen.getByText('>'));
-//     expect(handlePageChange).toHaveBeenCalledWith(2);
-//   });
-//   test('decrease page num and chnage URL query parameter when page changes', () => {
-//     const handlePageChange = jest.fn();
+  test('decrease page number and change URL query parameter when page changes', () => {
+    customRender(<Pagination pageInfo={{ ...pageInfo, page: 2 }} onPageChange={handlePageChange} />, { providerProps });
 
-//     render(
-//       <MemoryRouter initialEntries={['/']}>
-//         <Pagination currentPage={2} onPageChange={handlePageChange} isLastPage={false} />
-//       </MemoryRouter>
-//     );
+    fireEvent.click(screen.getByText('<'));
+    expect(handlePageChange).toHaveBeenCalledWith({ page: 1 });
+  });
 
-//     fireEvent.click(screen.getByText('<'));
-//     expect(handlePageChange).toHaveBeenCalledWith(1);
-//   });
-//   test('disables < button on the first page', () => {
-//     customRoutingRender(<Pagination currentPage={1} onPageChange={jest.fn()} isLastPage={false} />);
-//     expect(screen.getByText('<')).toBeDisabled();
-//   });
-//   test('disables > button on the last page', () => {
-//     customRoutingRender(<Pagination currentPage={1} onPageChange={jest.fn()} isLastPage />);
-//     expect(screen.getByText('>')).toBeDisabled();
-//   });
-// });
+  test('disables < button on the first page', () => {
+    customRender(<Pagination pageInfo={pageInfo} onPageChange={jest.fn()} />, { providerProps });
+    expect(screen.getByText('<')).toBeDisabled();
+  });
+
+  test('disables > button on the last page', () => {
+    customRender(<Pagination pageInfo={{ ...pageInfo, page: 3 }} onPageChange={jest.fn()} />, { providerProps });
+    expect(screen.getByText('>')).toBeDisabled();
+  });
+});

@@ -1,7 +1,5 @@
-import { CharacterInfo } from '@models/rick-and-morty-api.interface';
-
-export const mockSearchResults: CharacterInfo[] = [
-  {
+export const selectedCardsState = {
+  1: {
     id: '1',
     name: 'Rick Sanchez',
     status: 'Alive',
@@ -21,7 +19,7 @@ export const mockSearchResults: CharacterInfo[] = [
     url: '',
     created: '',
   },
-  {
+  2: {
     id: '2',
     name: 'Morty Smith',
     status: 'Alive',
@@ -36,9 +34,9 @@ export const mockSearchResults: CharacterInfo[] = [
       name: 'Earth',
       url: '',
     },
-    image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
+    image: '',
     episode: [],
     url: '',
     created: '',
   },
-];
+};

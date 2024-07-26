@@ -1,6 +1,6 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
-import { usersApi } from '@store/api/cardsApi';
+import { cardsApi } from '@store/api/cardsApi';
 import Loader from '@shared/Loader/Loader';
 import { CharacterId } from '@models/rick-and-morty-api.interface';
 import { skipToken } from '@reduxjs/toolkit/query';
@@ -15,7 +15,7 @@ const DetailItemPage: React.FC = () => {
   const location = useLocation();
   const { theme } = useTheme();
 
-  const { data: characterData, isFetching: cardFetching } = usersApi.useGetCardQuery(id ?? skipToken);
+  const { data: characterData, isFetching: cardFetching } = cardsApi.useGetCardQuery(id ?? skipToken);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

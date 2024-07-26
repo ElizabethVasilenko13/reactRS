@@ -1,14 +1,14 @@
 import { useLocalStorage } from '@hooks/useLocalStorage';
 import { createContext, ReactNode, useCallback, useContext, useEffect, useMemo } from 'react';
 
-type Theme = 'light' | 'dark';
+export type Theme = 'light' | 'dark';
 
 interface ContextTheme {
   theme: Theme;
   toggleTheme: () => void;
 }
 
-const ThemeContext = createContext<ContextTheme | undefined>(undefined);
+export const ThemeContext = createContext<ContextTheme | undefined>(undefined);
 
 export const useTheme = () => {
   const context = useContext(ThemeContext);
