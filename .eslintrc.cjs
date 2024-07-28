@@ -16,6 +16,7 @@ module.exports = {
     project: ['./tsconfig.json', 'tsconfig.vite.json'],
   },
   rules: {
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'react/function-component-definition': [
       'error',
