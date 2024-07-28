@@ -1,6 +1,6 @@
 import { fireEvent, screen } from '@testing-library/react';
 import { renderWithProviders } from '@utils/test-utils';
-import { selectedCardsState } from '__mocks__/selectedCards';
+import { selectedCardsState } from '../../__mocks__/selectedCards';
 import Flyout from './Flyout';
 
 jest.mock('@utils/convert-to-CSV', () => ({

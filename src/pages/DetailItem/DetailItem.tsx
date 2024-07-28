@@ -38,7 +38,7 @@ const DetailItemPage: React.FC = () => {
   };
 
   if (cardFetching) {
-    return <Loader />;
+    return <Loader data-testid="loader" />;
   }
 
   return (

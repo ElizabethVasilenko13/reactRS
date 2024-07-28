@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.23% </span>
+                <span class="strong">92.3% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>15/17</span>
+                <span class='fraction'>24/26</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.23% </span>
+                <span class="strong">92% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>15/17</span>
+                <span class='fraction'>23/25</span>
             </div>
         
             
@@ -119,27 +119,37 @@
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
 <a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -175,21 +185,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ChangeEvent, MouseEvent, useState } from 'react';
+import { useAppDispath, useAppSelector } from '@store/store';
+import { saveSearchTerm } from '@store/search/search.slice';
+import { saveLocalStorageData } from '@utils/local-storage';
+import { useTheme } from '@context/ThemeContext';
+import classNames from 'classnames';
 import styles from './SearchBar.module.scss';
 &nbsp;
 type SearchBarProps = {
-  onSearch: (searchQuery: string) =&gt; void;
-  startSearchQuery: string;
+  onSearch: (params: { page: number }) =&gt; void;
 };
 &nbsp;
-const SearchBar: React.FC&lt;SearchBarProps&gt; = ({ onSearch, startSearchQuery }) =&gt; {
-  const [searchQuery, setSearchQuery] = useState&lt;string&gt;(startSearchQuery || <span class="branch-1 cbranch-no" title="branch not covered" >'')</span>;
+const SearchBar: React.FC&lt;SearchBarProps&gt; = ({ onSearch }) =&gt; {
+  const baseSearchQuery = useAppSelector((state) =&gt; state.search.searchCharacterTerm);
+  const [searchQuery, setSearchQuery] = useState&lt;string&gt;(baseSearchQuery);
   const [isError, setIsError] = useState&lt;boolean&gt;(false);
-&nbsp;
-  useEffect(() =&gt; {
-    setSearchQuery(startSearchQuery);
-  }, [startSearchQuery]);
+  const { theme } = useTheme();
+  const dispatch = useAppDispath();
 &nbsp;
   const handleInput = ({ target: { value } }: ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
     setSearchQuery(value);
@@ -197,7 +210,9 @@ const SearchBar: React.FC&lt;SearchBarProps&gt; = ({ onSearch, startSearchQuery 
 &nbsp;
   const handleSearch = (e: MouseEvent&lt;HTMLButtonElement&gt;) =&gt; {
     e.preventDefault();
-    onSearch(searchQuery.trim());
+    onSearch({ page: 1 });
+    saveLocalStorageData('searchQuery', searchQuery.trim());
+    dispatch(saveSearchTerm(searchQuery.trim()));
   };
 &nbsp;
   const handleError = <span class="fstat-no" title="function not covered" >() =</span>&gt; {
@@ -205,8 +220,8 @@ const SearchBar: React.FC&lt;SearchBarProps&gt; = ({ onSearch, startSearchQuery 
   };
 &nbsp;
   return (
-    &lt;div&gt;
-      &lt;form className={styles.form}&gt;
+    &lt;div className={classNames(styles.container, styles[theme])}&gt;
+      &lt;form&gt;
         &lt;input
           data-testid="search-input"
           className={styles.input}
@@ -238,7 +253,7 @@ export default SearchBar;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-07-22T18:52:29.654Z
+                at 2024-07-28T22:34:35.335Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
