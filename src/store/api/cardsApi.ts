@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import { CharacterId, CharacterInfo, RickAndMortyApiResp } from '@models/rick-and-morty-api.interface';
 import { API_CHARACTER_ENDPOINT } from '@constants/api.constants';
 import { baseCardsApi } from './baseCardsApi';
