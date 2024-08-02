@@ -2,7 +2,6 @@ import { fireEvent, screen } from '@testing-library/react';
 import { customRoutingRender } from '@utils/test-utils';
 import SearchItem from './SearchItem';
 import { mockSearchResults } from '../../__mocks__/serachResult';
-// import { select, unselect } from '@store/cards/cards.slice';
 
 const mockedUsedNavigate = jest.fn();
 const mockData = mockSearchResults[0];
@@ -24,17 +23,4 @@ describe('SearchItem Component', () => {
     fireEvent.click(screen.getByRole('button'));
     expect(mockedUsedNavigate).toHaveBeenCalledWith(`/${mockData.id}`);
   });
-  // test('checkbox select the item', () => {
-  //   const dispatch = jest.fn();
-  //   // const mockedDispatch = jest.spyOn('action', select)
-  //   customRoutingRender(<SearchItem item={mockData} />);
-
-  //   const checkbox = screen.getByRole('checkbox');
-
-  //   fireEvent.click(checkbox);
-  //   expect(dispatch).toHaveBeenCalledTimes(1);
-  //   // customRoutingRender(<SearchItem item={mockData} />);
-  //   // fireEvent.click(checkbox);
-  //   // expect(dispatch).toHaveBeenCalledWith(unselect(mockData.id));
-  // });
 });

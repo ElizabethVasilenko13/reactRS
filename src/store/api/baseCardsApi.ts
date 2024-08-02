@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import { RICK_AND_MORTY_API_URL } from '@constants/api.constants';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 

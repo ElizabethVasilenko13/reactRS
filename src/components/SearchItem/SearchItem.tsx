@@ -38,6 +38,7 @@ const SearchItem: React.FC<SearchItemProps> = ({ item }) => {
       <div className={styles.movieInfo}>
         <h3>{item.name}</h3>
         <input
+          data-testid="checkbox"
           className={styles.checkbox}
           type="checkbox"
           name="selectedItem"
