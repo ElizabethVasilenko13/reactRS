@@ -1,23 +1,38 @@
 body {
-  background-color: #120e22;
-  background-image: url('./assets/space.jpg');
+  background-color: #755bdd;
   background-size: contain;
   font-family: 'Righteous', cursive;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  margin: 0 0 50px 0;
 
   &.light {
     background: #74ebd5;
     background: -webkit-linear-gradient(to right, #acb6e5, #74ebd5);
     background: linear-gradient(to right, #acb6e5, #74ebd5);
   }
+
+  &.dark {
+    background-image: url('/images/space.jpg');
+    background-color: #120e22;
+  }
 }
 
 .app-container {
-  margin: 0 auto;
+  margin: 50px auto;
   width: 80%;
+}
+
+.error-container {
+  margin: 50px auto;
+  width: 50%;
+  justify-content: center;
+  text-align: center;
+}
+
+.router-container {
+  display: flex;
+  align-items: flex-start;
 }
 
 h1 {

@@ -4,34 +4,84 @@
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "module": "ESNext",
+    "esModuleInterop": true,
     "skipLibCheck": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "esModuleInterop": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
     "baseUrl": "./src",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "paths": {
-      "@shared/*": ["./shared/*"],
-      "@components/*": ["./components/*"],
-      "@models/*": ["./models/*"],
-      "@constants/*": ["./constants/*"],
-      "@services/*": ["./services/*"],
-      "@assets/*": ["./assets/*"],
-      "@hooks/*": ["./hooks/*"],
-      "@pages/*": ["./pages/*"],
-      "@utils/*": ["./utils/*"],
-      "@store/*": ["./store/*"],
-      "@context/*": ["./context/*"]
+      "@shared/*": [
+        "./shared/*"
+      ],
+      "@components/*": [
+        "./components/*"
+      ],
+      "@models/*": [
+        "./models/*"
+      ],
+      "@constants/*": [
+        "./constants/*"
+      ],
+      "@services/*": [
+        "./services/*"
+      ],
+      "@assets/*": [
+        "./assets/*"
+      ],
+      "@hooks/*": [
+        "./hooks/*"
+      ],
+      "@pages1/*": [
+        "./pages1/*"
+      ],
+      "@utils/*": [
+        "./utils/*"
+      ],
+      "@store/*": [
+        "./store/*"
+      ],
+      "@context/*": [
+        "./context/*"
+      ],
+      "@styles/*": [
+        "./styles/*"
+      ]
     }
   },
-  "include": ["src", ".eslintrc.cjs", "jest.setup.ts"],
-  "references": [{ "path": "./tsconfig.vite.json" }]
+  "include": [
+    "src",
+    ".eslintrc.cjs",
+    "index.d.ts",
+    "jest.setup.ts",
+    "./src",
+    "**/*.ts",
+    "**/*.tsx",
+    "./next-env.d.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "./node_modules"
+  ]
 }

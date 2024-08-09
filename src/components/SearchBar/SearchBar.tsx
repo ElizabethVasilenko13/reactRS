@@ -1,21 +1,23 @@
-import { ChangeEvent, MouseEvent, useState } from 'react';
-import { useAppDispath, useAppSelector } from '@store/store';
-import { saveSearchTerm } from '@store/search/search.slice';
-import { saveLocalStorageData } from '@utils/local-storage';
+import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import { useTheme } from '@context/ThemeContext';
 import classNames from 'classnames';
 import styles from './SearchBar.module.scss';
+import { useRouter } from 'next/router';
 
-type SearchBarProps = {
-  onSearch: (params: { page: number }) => void;
-};
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
-  const baseSearchQuery = useAppSelector((state) => state.search.searchCharacterTerm);
-  const [searchQuery, setSearchQuery] = useState<string>(baseSearchQuery);
+const SearchBar: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [isError, setIsError] = useState<boolean>(false);
   const { theme } = useTheme();
-  const dispatch = useAppDispath();
+  const router = useRouter();
+
+  const queryName = router.query.name as string ?? '';
+
+  useEffect(() => {
+    if (queryName) {
+      setSearchQuery(queryName);
+    }
+  }, [queryName]);
 
   const handleInput = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(value);
@@ -23,9 +25,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
   const handleSearch = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    onSearch({ page: 1 });
-    saveLocalStorageData('searchQuery', searchQuery.trim());
-    dispatch(saveSearchTerm(searchQuery.trim()));
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, page: 1, name: searchQuery },
+    });
   };
 
   const handleError = () => {

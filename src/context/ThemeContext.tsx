@@ -1,5 +1,5 @@
 import { useLocalStorage } from '@hooks/useLocalStorage';
-import { createContext, ReactNode, useCallback, useContext, useEffect, useMemo } from 'react';
+import { createContext, ReactNode, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 export type Theme = 'light' | 'dark';
 
@@ -20,6 +20,7 @@ export const useTheme = () => {
 
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useLocalStorage<Theme>('theme', 'dark');
+  const [isMounted, setIsMounted] = useState(false);
 
   const toggleTheme = useCallback(() => {
     setTheme((prevTheme: string) => (prevTheme === 'light' ? 'dark' : 'light'));
@@ -34,8 +35,14 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   );
 
   useEffect(() => {
-    document.body.className = theme;
-  }, [theme]);
+    setIsMounted(true);
 
+    document.body.className = theme;
+
+  }, [theme]);
+  if (!isMounted) {
+    // Render nothing or a placeholder on the server
+    return null;
+  }
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 };

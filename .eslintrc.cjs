@@ -2,6 +2,7 @@ module.exports = {
   root: true,
   env: { browser: true, es2020: true },
   extends: [
+    'plugin:@next/next/recommended',
     'airbnb',
     'airbnb-typescript',
     'eslint:recommended',
@@ -11,7 +12,7 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'react', 'react-compiler', 'react-refresh', 'prettier', 'jest'],
+  plugins: ['@typescript-eslint', 'react', 'react-compiler', 'react-refresh', 'prettier', 'jest', 'next'],
   parserOptions: {
     project: ['./tsconfig.json', 'tsconfig.vite.json'],
   },

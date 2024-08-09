@@ -1,26 +1,22 @@
-import { useNavigate } from 'react-router-dom';
 import { CharacterInfo } from '@models/rick-and-morty-api.interface';
-import { useAppDispath, useAppSelector } from '@store/store';
+import { useAppDispatch, useAppSelector } from '@store/store';
 import { select, unselect } from '@store/cards/cards.slice';
 import { useTheme } from '@context/ThemeContext';
 import classNames from 'classnames';
 import styles from './SearchItem.module.scss';
+import { useRouter } from 'next/router';
 
 type SearchItemProps = {
   item: CharacterInfo;
 };
 
 const SearchItem: React.FC<SearchItemProps> = ({ item }) => {
-  const navigate = useNavigate();
-  const dispatch = useAppDispath();
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   const { theme } = useTheme();
 
   const selectedCard = useAppSelector((state) => state.cards.selectedCards[item.id]);
   const isChecked = !!selectedCard;
-
-  const navigateToDetailPage = () => {
-    navigate(`/${item.id}`);
-  };
 
   const handleCheckboxClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
@@ -30,8 +26,12 @@ const SearchItem: React.FC<SearchItemProps> = ({ item }) => {
     }
   };
 
+  const handleItemClick = () => {
+    router.push({pathname: `/${item.id}`, query: { ...router.query }});
+  };
+
   return (
-    <button type="button" className={classNames(styles.card, styles[theme])} onClick={navigateToDetailPage}>
+    <button onClick={handleItemClick} className={classNames(styles.card, styles[theme])}>
       <div className={styles.image}>
         <img src={item.image} alt="Character" />
       </div>

@@ -3,6 +3,7 @@ import { CharacterId, CharacterInfo, RickAndMortyApiResp } from '@models/rick-an
 import { API_CHARACTER_ENDPOINT } from '@constants/api.constants';
 import { baseCardsApi } from './baseCardsApi';
 
+
 export const cardsApi = baseCardsApi.injectEndpoints({
   endpoints: (create) => ({
     getCards: create.query<RickAndMortyApiResp, { name: string; page: number }>({

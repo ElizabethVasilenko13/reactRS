@@ -1,10 +1,10 @@
-import loader from '@assets/giphy.webp';
+import loader from '/public/images/giphy.webp';
 import styles from './Loader.module.scss';
 
 const Loader: React.FC = () => {
   return (
     <div className={styles.loader}>
-      <img src={String(loader)} alt="Loader" />
+      <img src={loader.src} alt="Loader" />
     </div>
   );
 };

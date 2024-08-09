@@ -1,9 +1,9 @@
 export interface RickAndMortyApiResp {
-  info: Info;
+  info: PageInfo;
   results: CharacterInfo[];
 }
 
-export interface Info {
+export interface PageInfo {
   count: number;
   pages: number;
   next: string | null;

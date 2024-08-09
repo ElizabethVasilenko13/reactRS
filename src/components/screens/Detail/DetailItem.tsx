@@ -1,21 +1,19 @@
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
-import { cardsApi } from '@store/api/cardsApi';
-import Loader from '@shared/Loader/Loader';
-import { CharacterId } from '@models/rick-and-morty-api.interface';
-import { skipToken } from '@reduxjs/toolkit/query';
 import { useTheme } from '@context/ThemeContext';
 import classNames from 'classnames';
 import styles from './DetailItem.module.scss';
+import { useRouter } from 'next/router';
+import {  CharacterInfo } from '@models/rick-and-morty-api.interface';
 
-const DetailItemPage: React.FC = () => {
-  const navigate = useNavigate();
+type DetailItemPageProps = {
+  characterData: CharacterInfo;
+}
+
+const DetailItemPage: React.FC<DetailItemPageProps> = ({characterData}) => {
+  const router = useRouter();
   const detailPageRef = useRef<HTMLDivElement>(null);
-  const { id } = useParams<{ id: CharacterId }>();
-  const location = useLocation();
   const { theme } = useTheme();
-
-  const { data: characterData, isFetching: cardFetching } = cardsApi.useGetCardQuery(id ?? skipToken);
+  const { id, ...remainingQuery } = router.query;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -31,15 +29,11 @@ const DetailItemPage: React.FC = () => {
   }, []);
 
   const handleClose = () => {
-    navigate({
+    router.push({
       pathname: '/',
-      search: location.search,
+      query: remainingQuery,
     });
   };
-
-  if (cardFetching) {
-    return <Loader data-testid="loader" />;
-  }
 
   return (
     <div className={classNames(styles.detailPage, styles[theme])} ref={detailPageRef}>

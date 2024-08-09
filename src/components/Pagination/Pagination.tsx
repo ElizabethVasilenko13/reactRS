@@ -1,25 +1,32 @@
 import { useTheme } from '@context/ThemeContext';
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
+import { PageInfo } from '@models/rick-and-morty-api.interface';
 import styles from './Pagination.module.scss';
 
 type PaginationProps = {
-  pageInfo: { page: number; totalPages: number };
-  onPageChange: (params: { page: number }) => void;
+  pageInfo: PageInfo;
 };
 
-const Pagination: React.FC<PaginationProps> = ({ pageInfo: { page, totalPages }, onPageChange }) => {
+const Pagination: React.FC<PaginationProps> = ({ pageInfo }) => {
   const { theme } = useTheme();
+  const router = useRouter();
+  const currentPage = Number(router.query.page) ?? 1;
+
   const handlePageChange = (newPageNum: number) => {
-    onPageChange({ page: newPageNum });
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, page: newPageNum },
+    });
   };
 
   return (
     <div className={classNames(styles.pagination, styles[theme])}>
-      <button type="button" disabled={page === 1} onClick={() => handlePageChange(page - 1)}>
+      <button type="button" disabled={currentPage === 1} onClick={() => handlePageChange(currentPage - 1)}>
         &lt;
       </button>
-      {page}
-      <button type="button" disabled={page === totalPages} onClick={() => handlePageChange(page + 1)}>
+      {currentPage || 1}
+      <button type="button" disabled={currentPage === pageInfo.pages} onClick={() => handlePageChange(currentPage + 1)}>
         &gt;
       </button>
     </div>
