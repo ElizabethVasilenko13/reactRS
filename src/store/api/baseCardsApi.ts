@@ -6,14 +6,14 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { RootState } from '@store/store';
 
 function isHydrateAction(action: Action): action is PayloadAction<RootState> {
-  return action.type === HYDRATE
+  return action.type === HYDRATE;
 }
 
 export const baseCardsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: RICK_AND_MORTY_API_URL }),
   extractRehydrationInfo(action, { reducerPath }): any {
     if (isHydrateAction(action)) {
-      return action.payload[reducerPath]
+      return action.payload[reducerPath];
     }
   },
   tagTypes: ['Cards'],

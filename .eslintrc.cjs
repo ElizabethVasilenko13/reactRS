@@ -12,7 +12,7 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'react', 'react-compiler', 'react-refresh', 'prettier', 'jest', 'next'],
+  plugins: ['@typescript-eslint', 'react', 'react-compiler', 'react-refresh', 'prettier', 'jest'],
   parserOptions: {
     project: ['./tsconfig.json', 'tsconfig.vite.json'],
   },
@@ -26,7 +26,6 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
-    ' @typescript-eslint/no-unused-expressions': 'off',
     'react-refresh/only-export-components': 'off',
     'jest/no-mocks-import': 'off',
     'max-len': ['error', { code: 120 }],
@@ -37,18 +36,20 @@ module.exports = {
     'react/state-in-constructor': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/destructuring-assignment': 'off',
+    'implicit-arrow-linebreak': 'off',
     '@typescript-eslint/no-explicit-any': 'error',
     'react/jsx-one-expression-per-line': 'off',
     '@typescript-eslint/comma-dangle': 'off',
     'no-console': 'off',
     'react/require-default-props': 'off',
+    'react/jsx-props-no-spreading': 'off',
     'import/prefer-default-export': 'off',
     'import/no-extraneous-dependencies': 'off',
-    '@typescript-eslint/no-use-before-define': 'off',
     'object-curly-newline': 'off',
     'react-hooks/exhaustive-deps': 'off',
     'no-restricted-globals': 'off',
     'jest/no-commented-out-tests': 'off',
+    'consistent-return': 'off'
   },
   overrides: [
     {

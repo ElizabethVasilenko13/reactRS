@@ -1,9 +1,8 @@
 import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import { useTheme } from '@context/ThemeContext';
 import classNames from 'classnames';
-import styles from './SearchBar.module.scss';
 import { useRouter } from 'next/router';
-
+import styles from './SearchBar.module.scss';
 
 const SearchBar: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -11,7 +10,7 @@ const SearchBar: React.FC = () => {
   const { theme } = useTheme();
   const router = useRouter();
 
-  const queryName = router.query.name as string ?? '';
+  const queryName = (router.query.name as string) ?? '';
 
   useEffect(() => {
     if (queryName) {

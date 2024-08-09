@@ -1,19 +1,27 @@
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { useTheme } from '@context/ThemeContext';
 import classNames from 'classnames';
-import styles from './DetailItem.module.scss';
 import { useRouter } from 'next/router';
-import {  CharacterInfo } from '@models/rick-and-morty-api.interface';
+import { CharacterInfo } from '@models/rick-and-morty-api.interface';
+import styles from './DetailItem.module.scss';
 
 type DetailItemPageProps = {
   characterData: CharacterInfo;
-}
+};
 
-const DetailItemPage: React.FC<DetailItemPageProps> = ({characterData}) => {
+const DetailItemPage: React.FC<DetailItemPageProps> = ({ characterData }) => {
   const router = useRouter();
   const detailPageRef = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
   const { id, ...remainingQuery } = router.query;
+
+  const handleClose = () => {
+    router.push({
+      pathname: '/',
+      query: remainingQuery,
+    });
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -28,13 +36,6 @@ const DetailItemPage: React.FC<DetailItemPageProps> = ({characterData}) => {
     };
   }, []);
 
-  const handleClose = () => {
-    router.push({
-      pathname: '/',
-      query: remainingQuery,
-    });
-  };
-
   return (
     <div className={classNames(styles.detailPage, styles[theme])} ref={detailPageRef}>
       <button type="button" onClick={handleClose}>
@@ -43,7 +44,7 @@ const DetailItemPage: React.FC<DetailItemPageProps> = ({characterData}) => {
       {characterData ? (
         <>
           <h2>{characterData.name}</h2>
-          <img src={characterData.image} alt="Character" />
+          <Image src={characterData.image} alt="Character" />
           <div className={styles.data}>
             <p data-testid="species">
               {' '}

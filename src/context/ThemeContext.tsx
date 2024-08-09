@@ -24,7 +24,7 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   const toggleTheme = useCallback(() => {
     setTheme((prevTheme: string) => (prevTheme === 'light' ? 'dark' : 'light'));
-  }, []);
+  }, [setTheme]);
 
   const value = useMemo(
     () => ({
@@ -37,11 +37,10 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   useEffect(() => {
     setIsMounted(true);
 
-    document.body.className = theme;
+    document.body.className = String(theme);
+  }, [theme, setTheme]);
 
-  }, [theme]);
   if (!isMounted) {
-    // Render nothing or a placeholder on the server
     return null;
   }
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

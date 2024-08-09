@@ -9,46 +9,50 @@ type DetailPageProps = {
   pageInfo: PageInfo;
   charactersData: CharacterInfo[];
   characterData: CharacterInfo;
-}
+};
 
-export default function Detail({pageInfo, charactersData, characterData}: DetailPageProps) {
-  return <MainLayout charactersData={charactersData} pageInfo={pageInfo}>
-      <DetailItemPage characterData={characterData}/>
-      </MainLayout>;
-}
+const Detail = ({ pageInfo, charactersData, characterData }: DetailPageProps) => {
+  return (
+    <MainLayout charactersData={charactersData} pageInfo={pageInfo}>
+      <DetailItemPage characterData={characterData} />
+    </MainLayout>
+  );
+};
 
-export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
-  (store) => async (context) => {
-    const { name = '', page = 1, id } = context.query;
+export default Detail;
 
-    if (context.query.name !== name || context.query.page !== page) {
-      return {
-        redirect: {
-          destination: `${id}/?name=${name}&page=${page}`,
-          permanent: false,
-        },
-      };
-    }
+export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
+  const { name = '', page = 1, id } = context.query;
 
-    const allCharactersPromise = store.dispatch(cardsApi.endpoints.getCards.initiate({ name: String(name), page: Number(page) }));
-      const oneCharacterPromise = store.dispatch(cardsApi.endpoints.getCard.initiate(String(id)));
-
-      const [allCharactersResult, oneCharacterResult] = await Promise.all([
-        allCharactersPromise,
-        oneCharacterPromise,
-        store.dispatch(cardsApi.util.getRunningQueriesThunk()),
-      ]);
-
-      if (allCharactersResult.error || oneCharacterResult.error) {
-        return { notFound: true };
-      }
-
+  if (context.query.name !== name || context.query.page !== page) {
     return {
-      props: {
-        pageInfo: allCharactersResult.data?.info,
-        charactersData: allCharactersResult.data?.results,
-        characterData: oneCharacterResult.data,
+      redirect: {
+        destination: `${id}/?name=${name}&page=${page}`,
+        permanent: false,
       },
     };
   }
-);
+
+  const allCharactersPromise = store.dispatch(
+    cardsApi.endpoints.getCards.initiate({ name: String(name), page: Number(page) })
+  );
+  const oneCharacterPromise = store.dispatch(cardsApi.endpoints.getCard.initiate(String(id)));
+
+  const [allCharactersResult, oneCharacterResult] = await Promise.all([
+    allCharactersPromise,
+    oneCharacterPromise,
+    store.dispatch(cardsApi.util.getRunningQueriesThunk()),
+  ]);
+
+  if (allCharactersResult.error || oneCharacterResult.error) {
+    return { notFound: true };
+  }
+
+  return {
+    props: {
+      pageInfo: allCharactersResult.data?.info,
+      charactersData: allCharactersResult.data?.results,
+      characterData: oneCharacterResult.data,
+    },
+  };
+});
