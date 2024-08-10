@@ -1,0 +1,40 @@
+body {
+  background-color: #120e22;
+  background-image: url('./assets/space.jpg');
+  background-size: contain;
+  font-family: 'Righteous', cursive;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0 0 50px 0;
+
+  &.light {
+    background: #74ebd5;
+    background: -webkit-linear-gradient(to right, #acb6e5, #74ebd5);
+    background: linear-gradient(to right, #acb6e5, #74ebd5);
+  }
+}
+
+.app-container {
+  margin: 0 auto;
+  width: 80%;
+}
+
+h1 {
+  color: #f0e14a;
+  text-align: center;
+}
+
+.error {
+  text-align: center;
+  margin: 40px auto;
+  color: white;
+}
+
+button {
+  font-family: 'Righteous', cursive;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+}

@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+}
+
+.header {
+  color: yellow;
+
+  &.light {
+    color: #2e00ff;
+  }
+}
