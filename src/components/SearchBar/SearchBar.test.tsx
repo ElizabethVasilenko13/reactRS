@@ -1,29 +1,54 @@
 import { fireEvent, screen } from '@testing-library/react';
 import { renderWithProviders } from '@utils/test-utils';
-import { saveLocalStorageData } from '@utils/local-storage';
+import { useRouter } from 'next/router';
 import SearchBar from './SearchBar';
 
-jest.mock('@utils/local-storage', () => ({
-  getLocalStorageData: jest.fn((_, defaultValue) => defaultValue),
-  saveLocalStorageData: jest.fn(),
+jest.mock('next/router', () => ({
+  useRouter: jest.fn(),
 }));
 
 describe('SearchBar Component', () => {
-  const onSearchMock = jest.fn();
+  const mockPush = jest.fn();
+  const mockUseRouter = useRouter as jest.Mock;
 
   beforeEach(() => {
-    jest.clearAllMocks();
-    localStorage.clear();
+    mockUseRouter.mockReturnValue({
+      pathname: '/test',
+      query: { name: '' },
+      push: mockPush,
+    });
   });
 
-  test('process Search button click', () => {
+  test('updates input value when typing', () => {
     renderWithProviders(<SearchBar />);
 
-    const inputElement = screen.getByTestId('search-input');
-    const searchButton = screen.getByText('Search');
-    fireEvent.change(inputElement, { target: { value: 'testQuery' } });
-    fireEvent.click(searchButton);
-    expect(onSearchMock).toHaveBeenCalledWith({ page: 1 });
-    expect(saveLocalStorageData).toHaveBeenCalledWith('searchQuery', 'testQuery');
+    const input = screen.getByTestId('search-input') as HTMLInputElement;
+    fireEvent.change(input, { target: { value: 'test query' } });
+    expect(input.value).toBe('test query');
+  });
+
+  test('updates URL query parameters when search button is clicked', () => {
+    renderWithProviders(<SearchBar />);
+
+    fireEvent.change(screen.getByTestId('search-input'), { target: { value: 'test query' } });
+    fireEvent.click(screen.getByText('Search'));
+
+    expect(mockPush).toHaveBeenCalledWith({
+      pathname: '/test',
+      query: { page: 1, name: 'test query' },
+    });
+  });
+
+  test('sets input value from URL query on mount', () => {
+    mockUseRouter.mockReturnValue({
+      pathname: '/test',
+      query: { name: 'initial query' },
+      push: mockPush,
+    });
+
+    renderWithProviders(<SearchBar />);
+
+    const input = screen.getByTestId('search-input') as HTMLInputElement;
+    expect(input.value).toBe('initial query');
   });
 });

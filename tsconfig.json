@@ -47,14 +47,11 @@
       "@services/*": [
         "./services/*"
       ],
-      "@assets/*": [
-        "./assets/*"
-      ],
       "@hooks/*": [
         "./hooks/*"
       ],
-      "@pages1/*": [
-        "./pages1/*"
+      "@pages/*": [
+        "./pages/*"
       ],
       "@utils/*": [
         "./utils/*"

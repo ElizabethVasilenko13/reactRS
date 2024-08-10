@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/SearchResults/SearchResults.tsx</title>
+    <title>Code coverage report for components/screens/Main/Main.tsx</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../prettify.css" />
-    <link rel="stylesheet" href="../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../sort-arrow-sprite.png);
+            background-image: url(../../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/SearchResults</a> SearchResults.tsx</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">components/screens/Main</a> Main.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>25/25</span>
+                <span class='fraction'>26/26</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>25/25</span>
+                <span class='fraction'>26/26</span>
             </div>
         
             
@@ -88,7 +88,8 @@
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -97,47 +98,49 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import SearchItem from '@components/SearchItem/SearchItem';
-import { CharacterInfo } from '@models/rick-and-morty-api.interface';
-import styles from './SearchResults.module.scss';
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import SearchBar from '@components/SearchBar/SearchBar';
+import SearchResults from '@components/SearchResults/SearchResults';
+import Pagination from '@components/Pagination/Pagination';
+import Flyout from '@components/Flyout/Flyout';
+import ThemeSwitcher from '@components/ThemeSwitcher/ThemeSwitcher';
+import { CharacterInfo, PageInfo } from '@models/rick-and-morty-api.interface';
+import styles from './Main.module.scss';
 &nbsp;
-type SearchResultsProps = {
-  searchResult: CharacterInfo[];
+type MainPageProps = {
+  pageInfo: PageInfo;
+  charactersData: CharacterInfo[];
 };
 &nbsp;
-const SearchResults: React.FC&lt;SearchResultsProps&gt; = ({ searchResult }) =&gt; {
+const Main: React.FC&lt;MainPageProps&gt; = ({ pageInfo, charactersData }) =&gt; {
   return (
-    &lt;&gt;
-      {!searchResult || searchResult.length === 0 ? (
-        &lt;h1&gt;Oops, something went wrong...&lt;/h1&gt;
-      ) : (
-        &lt;div className={styles.container}&gt;
-          {searchResult.map((searchItem: CharacterInfo) =&gt; (
-            &lt;SearchItem key={searchItem.id} item={searchItem} /&gt;
-          ))}
-        &lt;/div&gt;
-      )}
-    &lt;/&gt;
+    &lt;div className={styles.container}&gt;
+      &lt;ThemeSwitcher /&gt;
+      &lt;SearchBar /&gt;
+      &lt;Pagination pageInfo={pageInfo} /&gt;
+      &lt;Flyout /&gt;
+      &lt;SearchResults searchResult={<span class="branch-0 cbranch-no" title="branch not covered" >charactersData ?? []}</span> /&gt;
+    &lt;/div&gt;
   );
 };
 &nbsp;
-export default SearchResults;
+export default Main;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -147,14 +150,14 @@ export default SearchResults;
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at 2024-08-10T16:57:09.051Z
             </div>
-        <script src="../../prettify.js"></script>
+        <script src="../../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../sorter.js"></script>
-        <script src="../../block-navigation.js"></script>
+        <script src="../../../sorter.js"></script>
+        <script src="../../../block-navigation.js"></script>
     </body>
 </html>
     

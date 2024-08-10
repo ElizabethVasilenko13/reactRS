@@ -3,7 +3,7 @@ import { createContext, ReactNode, useCallback, useContext, useEffect, useMemo, 
 
 export type Theme = 'light' | 'dark';
 
-interface ContextTheme {
+export interface ContextTheme {
   theme: Theme;
   toggleTheme: () => void;
 }

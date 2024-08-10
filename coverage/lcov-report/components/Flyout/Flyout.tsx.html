@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.65% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>22/23</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">60% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>3/5</span>
+                <span class='fraction'>42/42</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">75% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>6/8</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>20/20</span>
+                <span class='fraction'>42/42</span>
             </div>
         
             
@@ -109,43 +109,43 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useAppSelector } from '@store/store';
 import { useDispatch } from 'react-redux';
@@ -168,10 +168,10 @@ const Flyout: React.FC = () =&gt; {
     dispatch(unselectAll());
   };
 &nbsp;
-  const dataTransform = <span class="fstat-no" title="function not covered" >(i</span>tem: CharacterInfo) =&gt; <span class="cstat-no" title="statement not covered" >[item.name, item.species, `${window.location.origin}/${item.id}`];</span>
+  const dataTransform = <span class="fstat-no" title="function not covered" >(item: CharacterInfo) =&gt; [item.name, item.species, `${window.location.origin}/${item.id}`];</span>
   const csvUrl = convertToCSV(selectedCards, dataTransform);
 &nbsp;
-  const downloadFileName = `${selectedCardsCount}_character${selectedCardsCount &gt; 1 ? 's' : <span class="branch-1 cbranch-no" title="branch not covered" >''}</span>.csv`;
+  const downloadFileName = `${selectedCardsCount}_character${selectedCardsCount &gt; 1 ? <span class="branch-0 cbranch-no" title="branch not covered" >'s' : ''}.</span>csv`;
 &nbsp;
   return (
     &lt;div className={classNames(styles.flyout, styles[theme])}&gt;
@@ -179,7 +179,7 @@ const Flyout: React.FC = () =&gt; {
         Unselect All
       &lt;/button&gt;
       &lt;p&gt;
-        {selectedCardsCount} item{selectedCardsCount &gt; 1 ? 's' : <span class="branch-1 cbranch-no" title="branch not covered" >''}</span> selected
+        {selectedCardsCount} item{selectedCardsCount &gt; 1 ? <span class="branch-0 cbranch-no" title="branch not covered" >'s' : ''} </span>selected
       &lt;/p&gt;
       &lt;a href={csvUrl} download={downloadFileName}&gt;
         Download
@@ -196,7 +196,7 @@ export default Flyout;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-07-30T16:32:29.549Z
+                at 2024-08-10T16:57:09.051Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

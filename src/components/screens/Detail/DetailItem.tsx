@@ -7,7 +7,7 @@ import { CharacterInfo } from '@models/rick-and-morty-api.interface';
 import styles from './DetailItem.module.scss';
 
 type DetailItemPageProps = {
-  characterData: CharacterInfo;
+  characterData: CharacterInfo | undefined;
 };
 
 const DetailItemPage: React.FC<DetailItemPageProps> = ({ characterData }) => {
@@ -37,8 +37,8 @@ const DetailItemPage: React.FC<DetailItemPageProps> = ({ characterData }) => {
   }, []);
 
   return (
-    <div className={classNames(styles.detailPage, styles[theme])} ref={detailPageRef}>
-      <button type="button" onClick={handleClose}>
+    <div data-testid="detail-page" className={classNames(styles.detailPage, styles[theme])} ref={detailPageRef}>
+      <button type="button" onClick={handleClose} data-testid="close-btn">
         &#x2717;
       </button>
       {characterData ? (

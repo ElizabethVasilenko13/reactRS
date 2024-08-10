@@ -1,66 +1,43 @@
-// import { ReactElement } from 'react';
-// import { render, RenderOptions } from '@testing-library/react';
-// import { MemoryRouter } from 'react-router-dom';
-// import { Theme, ThemeContext } from '@context/ThemeContext';
-// import { Provider } from 'react-redux';
-// import { store as defaultStore, AppStore, RootState } from '@store/store';
+import { render } from '@testing-library/react';
+import { ContextTheme, ThemeContext } from '@context/ThemeContext';
 
-// interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
-//   preloadedState?: Partial<RootState>;
-//   store?: AppStore;
-//   providerProps?: { theme: Theme; toggleTheme: () => void };
-// }
+import { configureStore } from '@reduxjs/toolkit';
+import { AppStore, rootReducer, RootState } from '@store/store';
+import { Provider } from 'react-redux';
+import { ReactElement } from 'react';
 
-// const customRender = (
-//   ui: ReactElement,
-//   {
-//     preloadedState = {},
-//     store = setupStore(preloadedState),
-//     providerProps = { theme: 'light', toggleTheme: jest.fn() },
-//     ...renderOptions
-//   }: ExtendedRenderOptions = {}
-// ) => {
-//   return render(
-//     <Provider store={store}>
-//       <ThemeContext.Provider value={providerProps}>{ui}</ThemeContext.Provider>
-//     </Provider>,
-//     renderOptions
-//   );
-// };
+const testStore = (state: Partial<RootState>): AppStore => {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState: state,
+  });
+};
 
-// const customRoutingRender = (
-//   ui: ReactElement,
-//   { providerProps = { theme: 'light', toggleTheme: jest.fn() }, ...renderOptions }: ExtendedRenderOptions = {}
-// ) => {
-//   return render(
-//     <Provider store={defaultStore}>
-//       <ThemeContext.Provider value={providerProps}>
-//         <MemoryRouter>{ui}</MemoryRouter>
-//       </ThemeContext.Provider>
-//     </Provider>,
-//     renderOptions
-//   );
-// };
+interface ExtendedRenderOptions {
+  preloadedState?: RootState | object;
+  store?: AppStore;
+  themeProviderProps?: ContextTheme;
+}
 
-// const renderWithProviders = (
-//   ui: ReactElement,
-//   {
-//     preloadedState = {},
-//     store = setupStore(preloadedState),
-//     providerProps = { theme: 'light', toggleTheme: jest.fn() },
-//     ...renderOptions
-//   }: ExtendedRenderOptions = {}
-// ) => {
-//   const Wrapper = ({ children }: { children: React.ReactNode }) => (
-//     <Provider store={store}>
-//       <ThemeContext.Provider value={providerProps}>
-//         <MemoryRouter>{children}</MemoryRouter>
-//       </ThemeContext.Provider>
-//     </Provider>
-//   );
+export const renderWithProviders = (
+  ui: ReactElement,
+  {
+    preloadedState = {},
+    store = testStore(preloadedState),
+    themeProviderProps = { theme: 'light', toggleTheme: jest.fn() },
+    ...renderOptions
+  }: ExtendedRenderOptions = {}
+) => {
+  const Wrapper = ({ children }: { children: React.ReactNode }) => (
+    <Provider store={store}>
+      <ThemeContext.Provider value={themeProviderProps}>{children}</ThemeContext.Provider>
+    </Provider>
+  );
 
-//   return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
-// };
+  const renderResult = render(ui, { wrapper: Wrapper, ...renderOptions });
 
-// export * from '@testing-library/react';
-// export { customRender, customRoutingRender, renderWithProviders };
+  return {
+    ...renderResult,
+    store,
+  };
+};

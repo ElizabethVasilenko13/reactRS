@@ -1,42 +1,69 @@
 import { fireEvent, screen } from '@testing-library/react';
-import { customRender } from '@utils/test-utils';
-import { Theme } from '@context/ThemeContext';
+import { useRouter } from 'next/router';
+import { renderWithProviders } from '@utils/test-utils';
 import Pagination from './Pagination';
 
+jest.mock('next/router', () => ({
+  useRouter: jest.fn(),
+}));
+
 describe('Pagination Component', () => {
-  const handlePageChange = jest.fn();
-
-  const providerProps: { theme: Theme; toggleTheme: () => void } = {
-    theme: 'light',
-    toggleTheme: jest.fn(),
-  };
-
+  const mockPush = jest.fn();
+  const mockUseRouter = useRouter as jest.Mock;
   const pageInfo = {
-    page: 1,
-    totalPages: 3,
+    count: 10,
+    pages: 2,
+    next: 'url',
+    prev: null,
   };
 
-  test('increase page number and change URL query parameter when page changes', () => {
-    customRender(<Pagination pageInfo={pageInfo} onPageChange={handlePageChange} />, { providerProps });
-
-    fireEvent.click(screen.getByText('>'));
-    expect(handlePageChange).toHaveBeenCalledWith({ page: 2 });
+  beforeEach(() => {
+    mockUseRouter.mockReturnValue({
+      pathname: '/test',
+      query: { page: 1 },
+      push: mockPush,
+    });
   });
 
-  test('decrease page number and change URL query parameter when page changes', () => {
-    customRender(<Pagination pageInfo={{ ...pageInfo, page: 2 }} onPageChange={handlePageChange} />, { providerProps });
+  test('increase page number and change URL query parameter when page changes', () => {
+    renderWithProviders(<Pagination pageInfo={pageInfo} />);
+
+    fireEvent.click(screen.getByText('>'));
+    expect(mockPush).toHaveBeenCalledWith({
+      pathname: '/test',
+      query: { page: 2 },
+    });
+  });
+
+  test('decreases page number and changes URL query parameter when < button is clicked', () => {
+    mockUseRouter.mockReturnValue({
+      pathname: '/test',
+      query: { page: '2' },
+      push: mockPush,
+    });
+
+    renderWithProviders(<Pagination pageInfo={{ ...pageInfo, pages: 2 }} />);
 
     fireEvent.click(screen.getByText('<'));
-    expect(handlePageChange).toHaveBeenCalledWith({ page: 1 });
+    expect(mockPush).toHaveBeenCalledWith({
+      pathname: '/test',
+      query: { page: 1 },
+    });
   });
 
   test('disables < button on the first page', () => {
-    customRender(<Pagination pageInfo={pageInfo} onPageChange={jest.fn()} />, { providerProps });
+    renderWithProviders(<Pagination pageInfo={pageInfo} />);
     expect(screen.getByText('<')).toBeDisabled();
   });
 
   test('disables > button on the last page', () => {
-    customRender(<Pagination pageInfo={{ ...pageInfo, page: 3 }} onPageChange={jest.fn()} />, { providerProps });
+    mockUseRouter.mockReturnValue({
+      pathname: '/test',
+      query: { page: 2 },
+      push: mockPush,
+    });
+
+    renderWithProviders(<Pagination pageInfo={{ ...pageInfo, pages: 2 }} />);
     expect(screen.getByText('>')).toBeDisabled();
   });
 });

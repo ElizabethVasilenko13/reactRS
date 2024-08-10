@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/SearchResults/SearchResults.tsx</title>
+    <title>Code coverage report for shared/Title/Title.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/SearchResults</a> SearchResults.tsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">shared/Title</a> Title.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>25/25</span>
+                <span class='fraction'>23/23</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>25/25</span>
+                <span class='fraction'>23/23</span>
             </div>
         
             
@@ -86,9 +86,7 @@
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -97,47 +95,43 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import SearchItem from '@components/SearchItem/SearchItem';
-import { CharacterInfo } from '@models/rick-and-morty-api.interface';
-import styles from './SearchResults.module.scss';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useTheme } from '@context/ThemeContext';
+import classNames from 'classnames';
+import styles from './Title.module.scss';
 &nbsp;
-type SearchResultsProps = {
-  searchResult: CharacterInfo[];
+type HeaderProps = {
+  title: string;
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
+  color?: string;
 };
 &nbsp;
-const SearchResults: React.FC&lt;SearchResultsProps&gt; = ({ searchResult }) =&gt; {
+const Title: React.FC&lt;HeaderProps&gt; = ({ title, level = 1, color }) =&gt; {
+  const { theme } = useTheme();
+&nbsp;
+  const Tag = `h${level}` as keyof JSX.IntrinsicElements;
+&nbsp;
   return (
-    &lt;&gt;
-      {!searchResult || searchResult.length === 0 ? (
-        &lt;h1&gt;Oops, something went wrong...&lt;/h1&gt;
-      ) : (
-        &lt;div className={styles.container}&gt;
-          {searchResult.map((searchItem: CharacterInfo) =&gt; (
-            &lt;SearchItem key={searchItem.id} item={searchItem} /&gt;
-          ))}
-        &lt;/div&gt;
-      )}
-    &lt;/&gt;
+    &lt;Tag className={classNames(styles.header, styles[theme])} style={{ color }}&gt;
+      {title}
+    &lt;/Tag&gt;
   );
 };
 &nbsp;
-export default SearchResults;
+export default Title;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
