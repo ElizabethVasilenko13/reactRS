@@ -1,20 +1,24 @@
 import 'whatwg-fetch';
 import { RICK_AND_MORTY_API_URL } from '@constants/api.constants';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Action, PayloadAction } from '@reduxjs/toolkit';
+import { CombinedState, createApi, EndpointDefinitions, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { UnknownAction, PayloadAction } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
 import { RootState } from '@store/store';
 
-function isHydrateAction(action: Action): action is PayloadAction<RootState> {
-  return action.type === HYDRATE;
-}
+type ExtractRehydrationInfoParams = {
+  reducerPath: string;
+};
 
 export const baseCardsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: RICK_AND_MORTY_API_URL }),
-  extractRehydrationInfo(action, { reducerPath }): any {
-    if (isHydrateAction(action)) {
-      return action.payload[reducerPath];
+  extractRehydrationInfo: (
+    action: UnknownAction,
+    { reducerPath }: ExtractRehydrationInfoParams
+  ): CombinedState<EndpointDefinitions, 'Cards', string> | undefined => {
+    if (action.type === HYDRATE) {
+      return (action as PayloadAction<RootState>).payload[reducerPath];
     }
+    return undefined;
   },
   tagTypes: ['Cards'],
   endpoints: () => ({}),

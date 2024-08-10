@@ -1,7 +1,7 @@
 import { CharacterId, CharacterInfo } from '@models/rick-and-morty-api.interface';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type CardsState = {
+export type CardsState = {
   selectedCards: Record<CharacterId, CharacterInfo>;
 };
 

@@ -14,9 +14,11 @@
   color: white;
 
   .image {
+    z-index: 0;
     width: 100%;
     height: 300px;
     flex-shrink: 0;
+    position: relative;
   }
 
   .image img {

@@ -49,7 +49,8 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'off',
     'no-restricted-globals': 'off',
     'jest/no-commented-out-tests': 'off',
-    'consistent-return': 'off'
+    'consistent-return': 'off',
+    'import/no-absolute-path': 'off'
   },
   overrides: [
     {

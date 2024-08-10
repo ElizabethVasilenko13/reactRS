@@ -17,7 +17,7 @@ describe('SearchBar Component', () => {
   });
 
   test('process Search button click', () => {
-    renderWithProviders(<SearchBar onSearch={onSearchMock} />);
+    renderWithProviders(<SearchBar />);
 
     const inputElement = screen.getByTestId('search-input');
     const searchButton = screen.getByText('Search');
@@ -26,11 +26,4 @@ describe('SearchBar Component', () => {
     expect(onSearchMock).toHaveBeenCalledWith({ page: 1 });
     expect(saveLocalStorageData).toHaveBeenCalledWith('searchQuery', 'testQuery');
   });
-
-  // test('shows error on error button click', () => {
-  //   renderWithProviders(<SearchBar onSearch={onSearchMock} />);
-
-  //   const errorButton = screen.getByText('Show Error');
-  //   expect(() => fireEvent.click(errorButton)).toThrow('I crashed!');
-  // });
 });

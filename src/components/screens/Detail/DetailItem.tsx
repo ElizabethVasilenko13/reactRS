@@ -44,7 +44,9 @@ const DetailItemPage: React.FC<DetailItemPageProps> = ({ characterData }) => {
       {characterData ? (
         <>
           <h2>{characterData.name}</h2>
-          <Image src={characterData.image} alt="Character" />
+          <div className={styles.image}>
+            <Image src={characterData.image} alt="Character" fill />
+          </div>
           <div className={styles.data}>
             <p data-testid="species">
               {' '}

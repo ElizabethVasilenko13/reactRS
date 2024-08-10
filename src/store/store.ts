@@ -9,15 +9,15 @@ export const rootReducer = combineReducers({
   [cardsApi.reducerPath]: cardsApi.reducer,
 });
 
+export type RootState = ReturnType<typeof rootReducer>;
+
 export const makeStore = () =>
   configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cardsApi.middleware),
   });
 
-// export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof makeStore>;
-export type RootState = ReturnType<AppStore['getState']>;
 export type AppDispatch = ReturnType<typeof makeStore>['dispatch'];
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

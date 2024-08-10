@@ -34,7 +34,13 @@ const SearchItem: React.FC<SearchItemProps> = ({ item }) => {
   return (
     <button type="button" onClick={handleItemClick} className={classNames(styles.card, styles[theme])}>
       <div className={styles.image}>
-        <Image src={item.image} alt="Character" />
+        <Image
+          src={item.image}
+          alt="Character"
+          fill
+          priority
+          sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
       </div>
       <div className={styles.movieInfo}>
         <h3>{item.name}</h3>
