@@ -1,10 +1,12 @@
 import { fireEvent, screen } from '@testing-library/react';
+import { useRouter } from 'next/navigation'; // Updated import path for the latest Next.js
 import { renderWithProviders } from '@utils/test-utils';
-import { useRouter } from 'next/router';
 import SearchBar from './SearchBar';
 
-jest.mock('next/router', () => ({
+jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
+  usePathname: jest.fn(() => '/test'),
+  useSearchParams: jest.fn(() => new URLSearchParams('name=initial query')),
 }));
 
 describe('SearchBar Component', () => {
@@ -14,7 +16,6 @@ describe('SearchBar Component', () => {
   beforeEach(() => {
     mockUseRouter.mockReturnValue({
       pathname: '/test',
-      query: { name: '' },
       push: mockPush,
     });
   });
@@ -33,19 +34,10 @@ describe('SearchBar Component', () => {
     fireEvent.change(screen.getByTestId('search-input'), { target: { value: 'test query' } });
     fireEvent.click(screen.getByText('Search'));
 
-    expect(mockPush).toHaveBeenCalledWith({
-      pathname: '/test',
-      query: { page: 1, name: 'test query' },
-    });
+    expect(mockPush).toHaveBeenCalledWith('/test?name=test+query&page=1');
   });
 
   test('sets input value from URL query on mount', () => {
-    mockUseRouter.mockReturnValue({
-      pathname: '/test',
-      query: { name: 'initial query' },
-      push: mockPush,
-    });
-
     renderWithProviders(<SearchBar />);
 
     const input = screen.getByTestId('search-input') as HTMLInputElement;

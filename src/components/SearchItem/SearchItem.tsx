@@ -33,7 +33,7 @@ const SearchItem: React.FC<SearchItemProps> = ({ item }) => {
   const itemUrl = `${pathname}${item.id}/?${searchParams.toString()}`;
 
   return (
-    <Link href={itemUrl} className={classNames(styles.card, styles[theme])}>
+    <Link href={itemUrl} data-testid="link" className={classNames(styles.card, styles[theme])}>
       <div className={styles.image}>
         <Image
           src={item.image}

@@ -1,13 +1,15 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { renderWithProviders } from '@utils/test-utils';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import SearchItem from './SearchItem';
 import { mockSearchResults } from '../../__mocks__/serachResult';
 
 const mockData = mockSearchResults[0];
 
-jest.mock('next/router', () => ({
+jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
+  useSearchParams: jest.fn(() => new URLSearchParams()),
+  usePathname: jest.fn(() => '/'),
 }));
 
 describe('SearchItem Component', () => {
@@ -17,7 +19,6 @@ describe('SearchItem Component', () => {
   beforeEach(() => {
     mockUseRouter.mockReturnValue({
       pathname: '/',
-      query: {},
       push: mockPush,
     });
   });
@@ -30,20 +31,9 @@ describe('SearchItem Component', () => {
     expect(screen.getByTestId('checkbox')).toBeInTheDocument();
   });
 
-  test('navigates to the correct route on item click', () => {
-    renderWithProviders(<SearchItem item={mockData} />);
-
-    fireEvent.click(screen.getByRole('button'));
-
-    expect(mockPush).toHaveBeenCalledWith({
-      pathname: `/${mockData.id}`,
-      query: {},
-    });
-  });
-
   test('applies correct theme-based styling', () => {
     renderWithProviders(<SearchItem item={mockData} />);
 
-    expect(screen.getByRole('button')).toHaveClass('light');
+    expect(screen.getByTestId('link')).toHaveClass('light');
   });
 });

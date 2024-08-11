@@ -1,24 +1,28 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
-import { useRouter } from 'next/router';
 import { mockSearchResults } from '__mocks__/serachResult';
 import { renderWithProviders } from '@utils/test-utils';
+import { useRouter, useSearchParams } from 'next/navigation';
 import DetailItemPage from './DetailItem';
 
-jest.mock('next/router', () => ({
+jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
+  useSearchParams: jest.fn(),
 }));
 
 const mockCharacterInfo = mockSearchResults[0];
 
 describe('DetailItemPage Component', () => {
   const mockPush = jest.fn();
+  const mockUseRouter = useRouter as jest.Mock;
+  const mockUseSearchParams = useSearchParams as jest.Mock;
 
   beforeEach(() => {
-    (useRouter as jest.Mock).mockReturnValue({
+    mockUseRouter.mockReturnValue({
       push: mockPush,
-      query: {},
     });
+    mockUseSearchParams.mockReturnValue(new URLSearchParams({ id: '123' }));
   });
+
   test('renders character data correctly', () => {
     renderWithProviders(<DetailItemPage characterData={mockCharacterInfo} />);
 
@@ -41,10 +45,7 @@ describe('DetailItemPage Component', () => {
     fireEvent.mouseDown(document.body);
 
     await waitFor(() => {
-      expect(mockPush).toHaveBeenCalledWith({
-        pathname: '/',
-        query: {},
-      });
+      expect(mockPush).toHaveBeenCalledWith('/?');
     });
   });
 
@@ -61,9 +62,6 @@ describe('DetailItemPage Component', () => {
     const closeButton = screen.getByTestId('close-btn');
     fireEvent.click(closeButton);
 
-    expect(mockPush).toHaveBeenCalledWith({
-      pathname: '/',
-      query: {},
-    });
+    expect(mockPush).toHaveBeenCalledWith('/?');
   });
 });
