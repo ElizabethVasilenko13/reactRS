@@ -1,5 +1,3 @@
-'use client';
-
 import { useTheme } from '@context/ThemeContext';
 import classNames from 'classnames';
 import styles from './Title.module.scss';

@@ -1,5 +1,3 @@
-'use client';
-
 import { useAppSelector } from '@store/store';
 import { useDispatch } from 'react-redux';
 import { unselectAll } from '@store/cards/cards.slice';

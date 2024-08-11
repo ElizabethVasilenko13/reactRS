@@ -1,20 +1,16 @@
-'use client';
-
 import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import { useTheme } from '@context/ThemeContext';
 import classNames from 'classnames';
-import { usePathname, useSearchParams, useRouter } from 'next/navigation'; // Import hooks from next/navigation
+import { useRouter } from 'next/router';
 import styles from './SearchBar.module.scss';
 
 const SearchBar: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isError, setIsError] = useState<boolean>(false);
   const { theme } = useTheme();
-  const pathname = usePathname(); // Get the current pathname
-  const searchParams = useSearchParams(); // Get search parameters
-  const router = useRouter(); // Use the router to navigate
+  const router = useRouter();
 
-  const queryName = searchParams.get('name') ?? '';
+  const queryName = (router.query.name as string) ?? '';
 
   useEffect(() => {
     if (queryName) {
@@ -28,10 +24,10 @@ const SearchBar: React.FC = () => {
 
   const handleSearch = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const newParams = new URLSearchParams(searchParams.toString());
-    newParams.set('page', '1');
-    newParams.set('name', searchQuery);
-    router.push(`${pathname}?${newParams.toString()}`);
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, page: 1, name: searchQuery },
+    });
   };
 
   const handleError = () => {

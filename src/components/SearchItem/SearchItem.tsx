@@ -1,13 +1,10 @@
-'use client';
-
 import { CharacterInfo } from '@models/rick-and-morty-api.interface';
 import Image from 'next/image';
 import { useAppDispatch, useAppSelector } from '@store/store';
 import { select, unselect } from '@store/cards/cards.slice';
 import { useTheme } from '@context/ThemeContext';
 import classNames from 'classnames';
-import Link from 'next/link';
-import { useSearchParams, usePathname } from 'next/navigation';
+import { useRouter } from 'next/router';
 import styles from './SearchItem.module.scss';
 
 type SearchItemProps = {
@@ -16,9 +13,8 @@ type SearchItemProps = {
 
 const SearchItem: React.FC<SearchItemProps> = ({ item }) => {
   const dispatch = useAppDispatch();
-  const searchParams = useSearchParams();
+  const router = useRouter();
   const { theme } = useTheme();
-  const pathname = usePathname();
 
   const selectedCard = useAppSelector((state) => state.cards.selectedCards[item.id]);
   const isChecked = !!selectedCard;
@@ -30,10 +26,13 @@ const SearchItem: React.FC<SearchItemProps> = ({ item }) => {
       dispatch(unselect(item.id));
     }
   };
-  const itemUrl = `${pathname}${item.id}/?${searchParams.toString()}`;
+
+  const handleItemClick = () => {
+    router.push({ pathname: `/${item.id}`, query: { ...router.query } });
+  };
 
   return (
-    <Link href={itemUrl} className={classNames(styles.card, styles[theme])}>
+    <button type="button" onClick={handleItemClick} className={classNames(styles.card, styles[theme])}>
       <div className={styles.image}>
         <Image
           src={item.image}
@@ -56,7 +55,7 @@ const SearchItem: React.FC<SearchItemProps> = ({ item }) => {
           onClick={(event) => event.stopPropagation()}
         />
       </div>
-    </Link>
+    </button>
   );
 };
 

@@ -37,7 +37,7 @@ const Page = async ({
   params: { id: string };
   searchParams: { name?: string; page?: string };
 }) => {
-  const { id } = params; // Path parameter
+  const { id } = params;
   const name = searchParams.name ?? '';
   const page = parseInt(searchParams.page ?? '1', 10);
 
