@@ -1,0 +1,84 @@
+{
+  "@typescript-eslint/no-explicit-any": "error",
+  "no-console": "off",
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "baseUrl": "./src",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@shared/*": [
+        "./shared/*"
+      ],
+      "@components/*": [
+        "./components/*"
+      ],
+      "@models/*": [
+        "./models/*"
+      ],
+      "@constants/*": [
+        "./constants/*"
+      ],
+      "@services/*": [
+        "./services/*"
+      ],
+      "@hooks/*": [
+        "./hooks/*"
+      ],
+      "@pages/*": [
+        "./pages/*"
+      ],
+      "@utils/*": [
+        "./utils/*"
+      ],
+      "@store/*": [
+        "./store/*"
+      ],
+      "@context/*": [
+        "./context/*"
+      ],
+      "@styles/*": [
+        "./styles/*"
+      ]
+    }
+  },
+  "include": [
+    "src",
+    ".eslintrc.cjs",
+    "index.d.ts",
+    "jest.setup.ts",
+    "./src",
+    "**/*.ts",
+    "**/*.tsx",
+    "./next-env.d.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "./node_modules"
+  ]
+}
