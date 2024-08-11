@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useTheme } from '@context/ThemeContext';
 import styles from './ThemeSwitcher.module.scss';

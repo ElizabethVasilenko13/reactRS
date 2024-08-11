@@ -1,9 +1,11 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useTheme } from '@context/ThemeContext';
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
 import { CharacterInfo } from '@models/rick-and-morty-api.interface';
+import { useSearchParams, useRouter } from 'next/navigation';
 import styles from './DetailItem.module.scss';
 
 type DetailItemPageProps = {
@@ -11,16 +13,16 @@ type DetailItemPageProps = {
 };
 
 const DetailItemPage: React.FC<DetailItemPageProps> = ({ characterData }) => {
+  const searchParams = useSearchParams();
   const router = useRouter();
   const detailPageRef = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
-  const { id, ...remainingQuery } = router.query;
+
+  const remainingQuery = new URLSearchParams(searchParams.toString());
+  remainingQuery.delete('id');
 
   const handleClose = () => {
-    router.push({
-      pathname: '/',
-      query: remainingQuery,
-    });
+    router.push(`/?${remainingQuery.toString()}`);
   };
 
   useEffect(() => {
@@ -49,7 +51,6 @@ const DetailItemPage: React.FC<DetailItemPageProps> = ({ characterData }) => {
           </div>
           <div className={styles.data}>
             <p data-testid="species">
-              {' '}
               <b>Species:</b> {characterData.species}
             </p>
             <p data-testid="gender">

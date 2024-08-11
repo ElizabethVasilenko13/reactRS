@@ -1,6 +1,8 @@
+'use client';
+
 import { useTheme } from '@context/ThemeContext';
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { PageInfo } from '@models/rick-and-morty-api.interface';
 import styles from './Pagination.module.scss';
 
@@ -10,14 +12,18 @@ type PaginationProps = {
 
 const Pagination: React.FC<PaginationProps> = ({ pageInfo }) => {
   const { theme } = useTheme();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const currentPage = Number(searchParams.get('page')) || 1;
+
   const router = useRouter();
-  const currentPage = Number(router.query.page) ?? 1;
 
   const handlePageChange = (newPageNum: number) => {
-    router.push({
-      pathname: router.pathname,
-      query: { ...router.query, page: newPageNum },
-    });
+    const newParams = new URLSearchParams(searchParams.toString());
+    newParams.set('page', newPageNum.toString());
+
+    router.push(`${pathname}?${newParams.toString()}`);
   };
 
   return (
