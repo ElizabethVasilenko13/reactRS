@@ -1,0 +1,55 @@
+body {
+  background-color: #755bdd;
+  background-size: contain;
+  font-family: 'Righteous', cursive;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  &.light {
+    background: #74ebd5;
+    background: -webkit-linear-gradient(to right, #acb6e5, #74ebd5);
+    background: linear-gradient(to right, #acb6e5, #74ebd5);
+  }
+
+  &.dark {
+    background-image: url('/images/space.jpg');
+    background-color: #120e22;
+  }
+}
+
+.app-container {
+  margin: 50px auto;
+  width: 80%;
+}
+
+.error-container {
+  margin: 50px auto;
+  width: 50%;
+  justify-content: center;
+  text-align: center;
+}
+
+.router-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+h1 {
+  color: #f0e14a;
+  text-align: center;
+}
+
+.error {
+  text-align: center;
+  margin: 40px auto;
+  color: white;
+}
+
+button {
+  font-family: 'Righteous', cursive;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+}
