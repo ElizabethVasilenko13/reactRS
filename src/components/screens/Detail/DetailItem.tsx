@@ -45,7 +45,13 @@ const DetailItemPage: React.FC<DetailItemPageProps> = ({ characterData }) => {
         <>
           <h2>{characterData.name}</h2>
           <div className={styles.image}>
-            <Image src={characterData.image} alt="Character" fill />
+            <Image
+              src={characterData.image}
+              alt="Character"
+              fill
+              priority
+              sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
           </div>
           <div className={styles.data}>
             <p data-testid="species">
