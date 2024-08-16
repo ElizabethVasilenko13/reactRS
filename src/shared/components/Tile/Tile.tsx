@@ -24,7 +24,7 @@ const Tile: React.FC<TileProps> = ({ submissionInfo }) => {
       </p>
       <p>
         <strong>Picture:</strong>
-        <img src={submissionInfo.image} alt="Image" />
+        <img src={submissionInfo.picture} alt="Image" />
       </p>
       <p>
         <strong>Country:</strong> {submissionInfo.country}

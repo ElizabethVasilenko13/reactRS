@@ -1,4 +1,4 @@
-import { FormFields, FormSubmission } from '@models/form.interface';
+import { FormSubmission } from '@models/form.interface';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface FormState {
@@ -15,29 +15,17 @@ const formSlice = createSlice({
   name: 'form',
   initialState,
   reducers: {
-    addUncontrolledFormSubmission(state, action: PayloadAction<FormFields>) {
+    addUncontrolledFormSubmission(state, action: PayloadAction<FormSubmission>) {
       state.uncontrolledFormSubmissions.forEach((submission) => {
         submission.isUpdated = false;
       });
-
-      const newSubmission: FormSubmission = {
-        ...action.payload,
-        id: Date.now().toString(),
-        isUpdated: true,
-      };
-      state.uncontrolledFormSubmissions.push(newSubmission);
+      state.uncontrolledFormSubmissions.push(action.payload);
     },
-    addReactHookFormSubmission(state, action: PayloadAction<FormFields>) {
+    addReactHookFormSubmission(state, action: PayloadAction<FormSubmission>) {
       state.reactHookFormSubmissions.forEach((submission) => {
         submission.isUpdated = false;
       });
-
-      const newSubmission: FormSubmission = {
-        ...action.payload,
-        id: Date.now().toString(),
-        isUpdated: true,
-      };
-      state.reactHookFormSubmissions.push(newSubmission);
+      state.reactHookFormSubmissions.push(action.payload);
     },
   },
 });

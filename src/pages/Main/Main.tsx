@@ -16,7 +16,7 @@ const Main = () => {
               <Link to="/uncontrolled-form">Uncontrolled Form</Link>
             </li>
             <li>
-              <Link to="/react-hook-form">React Hook Form</Link>
+              <Link to="/hook-form">React Hook Form</Link>
             </li>
           </ul>
         </nav>

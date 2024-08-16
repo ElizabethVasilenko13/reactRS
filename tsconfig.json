@@ -30,7 +30,8 @@
       "@utils/*": ["./utils/*"],
       "@store/*": ["./store/*"],
       "@context/*": ["./context/*"],
-      "@validation/*": ["./validation/*"]
+      "@validation/*": ["./validation/*"],
+      "@api/*": ["./api/*"]
     }
   },
   "include": ["src", ".eslintrc.cjs"],

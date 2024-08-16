@@ -4,13 +4,21 @@ export interface FormFields {
   email: string;
   password: string;
   confirmPassword: string;
-  gender: 'male' | 'female' | 'other';
+  gender: string;
   acceptTerms: boolean;
-  image: string;
+  picture: FileList;
   country: string;
 }
 
-export interface FormSubmission extends FormFields {
-  id: string;
+export interface FormSubmission {
+  name: string;
+  age: number;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  gender: string;
+  acceptTerms: boolean;
+  picture: string;
+  country: string;
   isUpdated: boolean;
 }
