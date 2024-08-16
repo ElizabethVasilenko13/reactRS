@@ -29,7 +29,8 @@
       "@pages/*": ["./pages/*"],
       "@utils/*": ["./utils/*"],
       "@store/*": ["./store/*"],
-      "@context/*": ["./context/*"]
+      "@context/*": ["./context/*"],
+      "@validation/*": ["./validation/*"]
     }
   },
   "include": ["src", ".eslintrc.cjs"],
