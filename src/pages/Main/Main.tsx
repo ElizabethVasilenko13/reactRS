@@ -26,7 +26,7 @@ const Main = () => {
           <h2>Uncontrolled Form Submissions</h2>
           <div className={styles.tileList}>
             {uncontrolledFormSubmissions.map((submission, index) => (
-              <Tile key={index} submissionInfo={submission} />
+              <Tile key={index} submissionInfo={submission} index={index} formType="uncontrolled" />
             ))}
           </div>
         </section>
@@ -34,7 +34,7 @@ const Main = () => {
           <h2>React Hook Form Submissions</h2>
           <div className={styles.tileList}>
             {reactHookFormSubmissions.map((submission, index) => (
-              <Tile key={index} submissionInfo={submission} />
+              <Tile key={index} submissionInfo={submission} index={index} formType="reactHook" />
             ))}
           </div>
         </section>

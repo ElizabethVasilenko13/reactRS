@@ -1,27 +1,31 @@
 import { FormSubmission } from '@models/form.interface';
 import styles from './Tile.module.scss';
 import classnames from 'classnames';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useAppDispatch } from '@store/store';
+import { resetIsUpdatedByIndex } from '@store/form/form.slice';
 
 type TileProps = {
   submissionInfo: FormSubmission;
+  index: number;
+  formType: 'uncontrolled' | 'reactHook';
 };
 
-const Tile: React.FC<TileProps> = ({ submissionInfo }) => {
-  const [isUpdated, setIsUpdated] = useState(false);
+const Tile: React.FC<TileProps> = ({ submissionInfo, index, formType }) => {
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (submissionInfo.isUpdated) {
-      setIsUpdated(true);
       const timer = setTimeout(() => {
-        setIsUpdated(false);
+        dispatch(resetIsUpdatedByIndex({ index, formType }));
       }, 5000);
 
       return () => clearTimeout(timer);
     }
   }, [submissionInfo.isUpdated]);
+
   return (
-    <div className={classnames(styles.tile, { [styles.updated]: isUpdated })}>
+    <div className={classnames(styles.tile, { [styles.updated]: submissionInfo.isUpdated })}>
       <p>
         <strong>Name:</strong> {submissionInfo.name}
       </p>
