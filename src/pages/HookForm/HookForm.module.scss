@@ -1,0 +1,154 @@
+.formContainer {
+  margin: 50px auto;
+  max-width: 400px;
+  border-radius: 20px;
+  width: 100%;
+  padding: 25px 40px 32px 40px;
+  backdrop-filter: blur(40px);
+  box-shadow: 0 0 12px 0 rgba(255, 255, 255, 0.37);
+
+  form {
+    width: 100%;
+  }
+
+  label {
+    display: block;
+  }
+}
+
+.link {
+  position: absolute;
+  top: 50px;
+  left: 100px;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  font-size: 20px;
+}
+
+.invalid {
+  color: red;
+  input {
+    color: red;
+  }
+
+  .inputContainer {
+    border-color: red;
+  }
+}
+
+.formControl {
+  label {
+    text-align: left;
+    color: white;
+    margin: 0px 0px 5px 3px;
+    &.required {
+      &::after {
+        content: ' *';
+        color: red;
+      }
+    }
+  }
+}
+
+.checkbox {
+  label {
+    display: flex;
+    align-items: center;
+    color: white;
+  }
+
+  input {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.inputErrorContainer {
+  min-height: 15px;
+}
+
+.inputError {
+  color: #ff3333;
+  visibility: hidden;
+  height: 0;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.invalid .inputError {
+  visibility: visible;
+  height: auto;
+}
+
+.select {
+  select {
+    padding: 10px;
+    border-radius: 20px;
+    background-color: transparent;
+    border: 1px solid #dfe1e6;
+    color: rgb(49, 49, 49);
+  }
+}
+
+.inputContainer {
+  height: 44px;
+  padding: 7px;
+  padding-left: 10px;
+  border: 1px solid #dfe1e6;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 8px;
+  box-sizing: border-box;
+  width: 100%;
+
+  input {
+    display: block;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    box-sizing: border-box;
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+
+    &::placeholder {
+      color: #dfe1e6;
+    }
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #fff !important;
+  }
+}
+
+.submitButton {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-left: auto;
+  display: block;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+
+  &:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+}
