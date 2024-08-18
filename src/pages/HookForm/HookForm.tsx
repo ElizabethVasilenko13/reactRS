@@ -9,6 +9,7 @@ import PasswordStrength from '@shared/components/PasswordStrength/PasswordStreng
 import { Link, useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import styles from './HookForm.module.scss';
+import FormError from '@shared/components/FormError/FormError';
 
 const HookForm = () => {
   const dispatch = useAppDispatch();
@@ -48,36 +49,28 @@ const HookForm = () => {
             <div className={styles.inputContainer}>
               <input id="name" {...register('name')} />
             </div>
-            <div className={styles.inputErrorContainer}>
-              {errors.name && <div className={styles.inputError}>{errors.name.message}</div>}
-            </div>
+            <FormError error={errors.name?.message} />
           </div>
           <div className={classNames(styles.formControl, { [styles.invalid]: errors.age })}>
             <label htmlFor="age">Age</label>
             <div className={styles.inputContainer}>
               <input id="age" type="number" {...register('age')} />
             </div>
-            <div className={styles.inputErrorContainer}>
-              {errors.age && <div className={styles.inputError}>{errors.age.message}</div>}
-            </div>
+            <FormError error={errors.age?.message} />
           </div>
           <div className={classNames(styles.formControl, { [styles.invalid]: errors.email })}>
             <label htmlFor="email">Email</label>
             <div className={styles.inputContainer}>
               <input id="email" type="email" {...register('email')} />
             </div>
-            <div className={styles.inputErrorContainer}>
-              {errors.email && <div className={styles.inputError}>{errors.email.message}</div>}
-            </div>
+            <FormError error={errors.email?.message} />
           </div>
           <div className={classNames(styles.formControl, { [styles.invalid]: errors.password })}>
             <label htmlFor="password">Password</label>
             <div className={styles.inputContainer}>
               <input id="password" type="password" {...register('password')} />
             </div>
-            <div className={styles.inputErrorContainer}>
-              {errors.password && <div className={styles.inputError}>{errors.password.message}</div>}
-            </div>
+            <FormError error={errors.password?.message} />
           </div>
           <PasswordStrength password={password} />
           <div className={classNames(styles.formControl, { [styles.invalid]: errors.confirmPassword })}>
@@ -85,9 +78,7 @@ const HookForm = () => {
             <div className={styles.inputContainer}>
               <input id="confirmPassword" type="password" {...register('confirmPassword')} />
             </div>
-            <div className={styles.inputErrorContainer}>
-              {errors.confirmPassword && <div className={styles.inputError}>{errors.confirmPassword.message}</div>}
-            </div>
+            <FormError error={errors.confirmPassword?.message} />
           </div>
           <div className={classNames(styles.formControl, { [styles.invalid]: errors.gender })}>
             <label htmlFor="gender">Gender</label>
@@ -99,27 +90,21 @@ const HookForm = () => {
                 <option value="other">Other</option>
               </select>
             </div>
-            <div className={styles.inputErrorContainer}>
-              {errors.gender && <div className={styles.inputError}>{errors.gender.message}</div>}
-            </div>
+            <FormError error={errors.gender?.message} />
           </div>
           <div className={classNames(styles.checkbox, { [styles.invalid]: errors.acceptTerms })}>
             <label htmlFor="acceptTerms">
               Accept Terms and Conditions
               <input id="acceptTerms" type="checkbox" {...register('acceptTerms')} />
             </label>
-            <div className={styles.inputErrorContainer}>
-              {errors.acceptTerms && <div className={styles.inputError}>{errors.acceptTerms.message}</div>}
-            </div>
+            <FormError error={errors.acceptTerms?.message} />
           </div>
           <div className={classNames(styles.formControl, { [styles.invalid]: errors.picture })}>
             <label htmlFor="profilePicture">Profile Picture</label>
             <div>
               <input id="profilePicture" type="file" accept="image/png, image/jpeg" {...register('picture')} />
             </div>
-            <div className={styles.inputErrorContainer}>
-              {errors.picture && <div className={styles.inputError}>{errors.picture.message}</div>}
-            </div>
+            <FormError error={errors.picture?.message} />
           </div>
           <div className={classNames(styles.formControl, { [styles.invalid]: errors.country })}>
             <label htmlFor="country">Country</label>
@@ -131,9 +116,7 @@ const HookForm = () => {
                 <option key={index} value={country} />
               ))}
             </datalist>
-            <div className={styles.inputErrorContainer}>
-              {errors.country && <div className={styles.inputError}>{errors.country.message}</div>}
-            </div>
+            <FormError error={errors.country?.message} />
           </div>
           <button type="submit" className={styles.submitButton} disabled={!isValid}>
             Submit

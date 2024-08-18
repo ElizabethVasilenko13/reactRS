@@ -67,23 +67,6 @@ h1 {
   }
 }
 
-.inputErrorContainer {
-  min-height: 15px;
-}
-
-.inputError {
-  color: #ff3333;
-  visibility: hidden;
-  height: 0;
-  font-size: 12px;
-  margin-left: 5px;
-}
-
-.invalid .inputError {
-  visibility: visible;
-  height: auto;
-}
-
 .select {
   select {
     padding: 10px;
