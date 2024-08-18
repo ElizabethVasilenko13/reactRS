@@ -1,0 +1,41 @@
+.tile {
+  box-sizing: border-box;
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  backdrop-filter: blur(40px);
+  box-shadow: 0 0 12px 0 rgba(255, 255, 255, 0.37);
+  width: 300px;
+  background-color: transparent;
+
+  h3 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  p {
+    margin: 5px 0;
+    color: rgba(255, 255, 255, 0.759);
+
+    strong {
+      color: white;
+    }
+
+    img {
+      display: block;
+      max-width: 80%;
+      height: auto;
+      margin-top: 10px;
+      border-radius: 20px;
+    }
+  }
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+}
+
+.updated {
+  border: 3px solid #1aff00;
+}
