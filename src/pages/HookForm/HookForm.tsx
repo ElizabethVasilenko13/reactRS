@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@store/store';
 import { formValidationSchema } from '@validation/form.validator';
 import { convertImageToBase64 } from '@utils/image-convert';
 import { addReactHookFormSubmission } from '@store/form/form.slice';
+import PasswordStrength from '@shared/components/PasswordStrength/PasswordStrength';
 import { Link, useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import styles from './HookForm.module.scss';
@@ -18,7 +19,10 @@ const HookForm = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
+    watch,
   } = useForm<FormFields>({ resolver: yupResolver(formValidationSchema), mode: 'all' });
+
+  const password = watch('password', '');
 
   const onSubmit = async (data: FormFields) => {
     const picture = data.picture[0] ? await convertImageToBase64(data.picture[0]) : '';
@@ -34,10 +38,8 @@ const HookForm = () => {
   };
 
   return (
-    <>
-      <Link to="/" className={styles.link}>
-        Go to main page
-      </Link>
+    <div className={styles.formPage}>
+      <Link to="/"> Go to main page</Link>
       <div className={styles.formContainer}>
         <h1>User Details Form</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -77,6 +79,7 @@ const HookForm = () => {
               {errors.password && <div className={styles.inputError}>{errors.password.message}</div>}
             </div>
           </div>
+          <PasswordStrength password={password} />
           <div className={classNames(styles.formControl, { [styles.invalid]: errors.confirmPassword })}>
             <label htmlFor="confirmPassword">Confirm Password</label>
             <div className={styles.inputContainer}>
@@ -137,7 +140,7 @@ const HookForm = () => {
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

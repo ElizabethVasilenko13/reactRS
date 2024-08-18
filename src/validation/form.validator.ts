@@ -1,5 +1,12 @@
 import * as Yup from 'yup';
 
+export const passwordStrengthRegex = {
+  number: /(?=.*\d)/,
+  uppercase: /(?=.*[A-Z])/,
+  lowercase: /(?=.*[a-z])/,
+  special: /(?=.*[@$!%*?&])/,
+};
+
 export const formValidationSchema = Yup.object({
   name: Yup.string()
     .required('Name is required')
@@ -12,11 +19,11 @@ export const formValidationSchema = Yup.object({
   email: Yup.string().email('Invalid email address').required('Email is required'),
   password: Yup.string()
     .required('Password is required')
-    .min(8, 'Password must be at least 8 characters')
-    .matches(/[A-Z]/, 'Password must contain an uppercase letter')
-    .matches(/[a-z]/, 'Password must contain a lowercase letter')
-    .matches(/[0-9]/, 'Password must contain a number')
-    .matches(/[\W_]/, 'Password must contain a special character'),
+    .matches(passwordStrengthRegex.number, 'Password must contain at least one number')
+    .matches(passwordStrengthRegex.uppercase, 'Password must contain at least one uppercase letter')
+    .matches(passwordStrengthRegex.lowercase, 'Password must contain at least one lowercase letter')
+    .matches(passwordStrengthRegex.special, 'Password must contain at least one special character')
+    .min(8, 'Password must be at least 8 characters long'),
   confirmPassword: Yup.string()
     .required('Confirm password is required')
     .oneOf([Yup.ref('password')], 'Passwords must match'),

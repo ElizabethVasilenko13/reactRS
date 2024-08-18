@@ -1,5 +1,4 @@
 .formContainer {
-  margin: 50px auto;
   max-width: 400px;
   border-radius: 20px;
   width: 100%;
@@ -16,10 +15,12 @@
   }
 }
 
-.link {
-  position: absolute;
-  top: 50px;
-  left: 100px;
+.formPage {
+  margin-top: 50px;
+  gap: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: start;
 }
 
 h1 {

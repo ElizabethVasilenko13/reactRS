@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 import styles from './UncontrollredForm.module.scss';
 import { formValidationSchema } from '@validation/form.validator';
 import classNames from 'classnames';
+import PasswordStrength from '@shared/components/PasswordStrength/PasswordStrength';
 
 const UncontrollredForm = () => {
   const dispatch = useAppDispatch();
@@ -25,6 +26,7 @@ const UncontrollredForm = () => {
   const countryRef = useRef<HTMLInputElement>(null);
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [password, setPassword] = useState<string>('');
 
   const validate = async () => {
     const formData = {
@@ -89,10 +91,8 @@ const UncontrollredForm = () => {
   };
 
   return (
-    <>
-      <Link to="/" className={styles.link}>
-        Go to main page
-      </Link>
+    <div className={styles.formPage}>
+      <Link to="/">Go to main page</Link>
       <div className={styles.formContainer}>
         <h1>User Details Form</h1>
         <form onSubmit={handleSubmit}>
@@ -129,12 +129,19 @@ const UncontrollredForm = () => {
             <label htmlFor="password">Password</label>
             <div className={styles.inputContainer}>
               {' '}
-              <input id="password" type="password" ref={passwordRef} />
+              <input
+                id="password"
+                type="password"
+                ref={passwordRef}
+                onChange={() => setPassword(passwordRef.current?.value || '')}
+              />
             </div>
             <div className={styles.inputErrorContainer}>
               {errors.password && <div className={styles.inputError}>{errors.password}</div>}
             </div>{' '}
           </div>
+          <PasswordStrength password={password} />
+
           <div className={classNames(styles.formControl, { [styles.invalid]: errors.confirmPassword })}>
             <label htmlFor="confirmPassword">Confirm Password</label>
             <div className={styles.inputContainer}>
@@ -195,7 +202,7 @@ const UncontrollredForm = () => {
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 
