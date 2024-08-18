@@ -65,11 +65,6 @@ const FormControl = forwardRef<HTMLInputElement | HTMLSelectElement, FormControl
                   onChange={onChange}
                   list={list}
                 />
-                {list && (
-                  <datalist id={`${id}List`}>
-                    {list && list.split(',').map((item, index) => <option key={index} value={item.trim()} />)}
-                  </datalist>
-                )}
               </div>
             </>
           );
