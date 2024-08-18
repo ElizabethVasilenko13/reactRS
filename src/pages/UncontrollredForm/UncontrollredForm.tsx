@@ -7,9 +7,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import styles from './UncontrollredForm.module.scss';
 import { formValidationSchema } from '@validation/form.validator';
-import classNames from 'classnames';
 import PasswordStrength from '@shared/components/PasswordStrength/PasswordStrength';
-import FormError from '@shared/components/FormError/FormError';
+import FormControl from '@shared/components/FormControl/FormControl';
 
 const UncontrollredForm = () => {
   const dispatch = useAppDispatch();
@@ -97,83 +96,66 @@ const UncontrollredForm = () => {
       <div className={styles.formContainer}>
         <h1>User Details Form</h1>
         <form onSubmit={handleSubmit}>
-          <div className={classNames(styles.formControl, { [styles.invalid]: errors.name })}>
-            <label htmlFor="name">Name</label>
-            <div className={styles.inputContainer}>
-              <input id="name" ref={nameRef} />
-            </div>
-            <FormError error={errors.name} />
-          </div>
-          <div className={classNames(styles.formControl, { [styles.invalid]: errors.age })}>
-            <label htmlFor="age">Age</label>
-            <div className={styles.inputContainer}>
-              <input id="age" type="number" ref={ageRef} />
-            </div>
-            <FormError error={errors.age} />
-          </div>
-          <div className={classNames(styles.formControl, { [styles.invalid]: errors.email })}>
-            <label htmlFor="email">Email</label>
-            <div className={styles.inputContainer}>
-              <input id="email" type="email" ref={emailRef} />
-            </div>
-            <FormError error={errors.email} />
-          </div>
-          <div className={classNames(styles.formControl, { [styles.invalid]: errors.password })}>
-            <label htmlFor="password">Password</label>
-            <div className={styles.inputContainer}>
-              <input
-                id="password"
-                type="password"
-                ref={passwordRef}
-                onChange={() => setPassword(passwordRef.current?.value || '')}
-              />
-            </div>
-            <FormError error={errors.password} />
-          </div>
+          <FormControl id="name" label="Name" ref={nameRef} error={errors.name} />
+          <FormControl id="age" label="Age" type="number" ref={ageRef} error={errors.age} />
+          <FormControl id="email" label="Email" type="email" ref={emailRef} error={errors.email} />
+          <FormControl
+            id="password"
+            label="Password"
+            type="password"
+            ref={passwordRef}
+            error={errors.password}
+            onChange={() => setPassword(passwordRef.current?.value || '')}
+          />
           <PasswordStrength password={password} />
-          <div className={classNames(styles.formControl, { [styles.invalid]: errors.confirmPassword })}>
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <div className={styles.inputContainer}>
-              <input id="confirmPassword" type="password" ref={confirmPasswordRef} />
-            </div>
-            <FormError error={errors.confirmPassword} />
-          </div>
-          <div className={classNames(styles.formControl, { [styles.invalid]: errors.gender })}>
-            <label htmlFor="gender">Gender</label>
-            <div className={styles.select}>
-              <select id="gender" ref={genderRef}>
-                <option value="">Select</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-            <FormError error={errors.gender} />
-          </div>
-          <div className={classNames(styles.formControl, { [styles.invalid]: errors.acceptTerms })}>
-            <label htmlFor="acceptTerms">
-              Accept Terms and Conditions
-              <input id="acceptTerms" type="checkbox" ref={acceptTermsRef} />
-            </label>
-            <FormError error={errors.acceptTerms} />
-          </div>
-          <div className={classNames(styles.formControl, { [styles.invalid]: errors.picture })}>
-            <label htmlFor="profilePicture">Profile Picture</label>
-            <input id="profilePicture" type="file" accept="image/png, image/jpeg" ref={pictureRef} />
-            <FormError error={errors.picture} />
-          </div>
-          <div className={classNames(styles.formControl, { [styles.invalid]: errors.country })}>
-            <label htmlFor="country">Country</label>
-            <div className={styles.inputContainer}>
-              <input id="country" list="countryList" ref={countryRef} />
-            </div>
+          <FormControl
+            id="confirmPassword"
+            label="Confirm Password"
+            type="password"
+            ref={confirmPasswordRef}
+            error={errors.confirmPassword}
+          />
+          <FormControl
+            id="gender"
+            label="Gender"
+            type="select"
+            ref={genderRef}
+            error={errors.gender}
+            options={[
+              { value: 'male', label: 'Male' },
+              { value: 'female', label: 'Female' },
+              { value: 'other', label: 'Other' },
+            ]}
+          />
+          <FormControl
+            id="acceptTerms"
+            label="Accept Terms and Conditions"
+            type="checkbox"
+            ref={acceptTermsRef}
+            error={errors.acceptTerms}
+          />
+          <FormControl
+            id="profilePicture"
+            label="Profile Picture"
+            type="file"
+            ref={pictureRef}
+            error={errors.picture}
+          />
+          <FormControl
+            id="country"
+            label="Country"
+            type="text"
+            list="countryList"
+            ref={countryRef}
+            error={errors.country}
+          >
+            {' '}
             <datalist id="countryList">
               {countries.map((country, index) => (
                 <option key={index} value={country} />
               ))}
             </datalist>
-            <FormError error={errors.country} />
-          </div>
+          </FormControl>
           <button type="submit" className={styles.submitButton}>
             Submit
           </button>
